@@ -1,0 +1,16 @@
+{
+    "name": "team/projectbuilder",
+    "autoload": {
+        "psr-4": {
+            "Team\\Projectbuilder\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "NicolasSoulay",
+            "email": "soulaynicolas@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
