@@ -4,7 +4,7 @@ namespace Team\Projectbuilder\Core;
 
 class Model
 {
-    private static $dsn = 'mysql:dbname=projectbuilder;host=localhost:3308';
+    private static $dsn = 'mysql:dbname=projectbuilder;host=localhost';
     private static $username = 'me';
     private static $password = '123456';
     public static $instance = null;
@@ -50,26 +50,5 @@ class Model
                 "'"
         );
         return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
-    }
-
-    public static function create()
-    {
-        $vars = self::clear();
-        $sql = 'insert into ' . self::getClass() . " values(" . $vars[0] . ")";
-        return self::getInstance()->prepare($sql)->execute($vars[1]);
-    }
-
-    private static function clear()
-    {
-        unset($_POST['create']);
-        $return[] = ':id';
-        if (isset($_GET['insert'])) {
-            $return[]['id'] = null;
-        }
-        foreach ($_POST as $key => $value) {
-            $return[0] .= ',:' . $key;
-            $return[1][$key] = htmlspecialchars($value);
-        }
-        return $return;
     }
 }
