@@ -5,11 +5,11 @@ namespace Team\Projectbuilder\Controller;
 use Team\Projectbuilder\Core\Security;
 use Team\Projectbuilder\Core\Views;
 
-class DefaultPage
-{
+class DefaultPage{
+
     public function __construct()
     {
-        $view = new Views('DefaultPage', 'Ma super Appli');
+        $view = new Views('DefaultPage', 'Project Builder');
         if (isset($_POST['submit'])) {
             Security::ConnectUser();
         }
