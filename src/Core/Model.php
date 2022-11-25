@@ -4,7 +4,7 @@ namespace Team\Projectbuilder\Core;
 
 class Model
 {
-    private static $dsn = 'mysql:dbname=projectbuilder;host=localhost';
+    private static $dsn = 'mysql:dbname=projectbuilder;host=localhost:3308';
     private static $username = 'me';
     private static $password = '123456';
     public static $instance = null;
