@@ -29,6 +29,34 @@ class Model
         }
         return self::$instance;
     }
+    public static function getAll() {
+        $query = self::getInstance()->query('select * from '.self::getClass());
+        return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
+    }
+    
+    public static function getById($id) {
+        $query = self::getInstance()->query('select * from '.self::getClass().' where id='.$id);
+        return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
+    }
+
+    public static function deleteById($id) {
+        $sql = "delete from ".self::getClass()." where id=".$id;
+        $query = self::getInstance()->exec($sql);
+    }
+
+    public static function updateById() {
+        $sql = "update ".self::getClass()." set ";
+        foreach ($_POST as $key=>$value) {
+            if ($key === 'create') {
+                continue;
+            }
+            $sql .= $key.'= :'.$key.',';
+        }
+        $sql = substr($sql,0,strlen($sql)-1);
+        $sql .= " where id=".$_GET['update'];
+        $vars = self::clear();
+        return self::getInstance()->prepare($sql)->execute($vars[1]);
+    }
 
     private static function getClass()
     {
@@ -59,6 +87,21 @@ class Model
         return $return;
     }
 
+    public static function newEmail($mail)
+    {
+        $return = '';
+        $users = self::getAll();
+            foreach ($users as $user) {
+                $userarr = (array) $user;
+                foreach ($userarr as $key) {
+                    if ($mail === $key) {
+                        $return = 'Email is already used';
+                    } 
+                }
+            }
+        return $return;
+    }
+
     public static function create()
         {
             $vars = self::clear();
@@ -68,6 +111,8 @@ class Model
 
 
 }
+
+
 
 
 
