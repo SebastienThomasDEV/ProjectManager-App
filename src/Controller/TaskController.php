@@ -25,7 +25,7 @@ class TaskController {
         $view->setVar('submit', 'Create new task');
         $view->setVar('message', 'Task list');
         //$tasks = Task::getAll();
-        $project = Project::getById(3);
+        $project = Project::getById($_GET['idproject']);
         $project->setTasks();
         foreach ($project->getTasks() as $task) {
             $task->setUser();

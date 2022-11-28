@@ -1,6 +1,5 @@
 <?php
 
-echo "<h2>$title</h2>";
 
 if (isset($message)) {
     echo '<div>'.$message.'</div>';

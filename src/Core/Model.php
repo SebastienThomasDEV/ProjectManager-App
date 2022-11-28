@@ -34,16 +34,14 @@ class Model
         }
         return self::$instance;
     }
-    public static function getAll() {
-        $query = self::getInstance()->query('select * from '.self::getClass());
-        return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
-    }
-    
-    public static function getById($id) {
-        $query = self::getInstance()->query('select * from '.self::getClass().' where id='.$id);
-        return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
-    }
 
+    public static function getById($id) {
+        $query = self::getInstance()
+        ->query('select * from '.self::getClass().' where id='.$id);
+        $result = $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
+        return $result[0];
+    }
+   
     public static function deleteById($id) {
         $sql = "delete from ".self::getClass()." where id=".$id;
         $query = self::getInstance()->exec($sql);
@@ -76,13 +74,6 @@ class Model
         return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
     }
 
-    public static function getById($id) {
-        $query = self::getInstance()
-        ->query('select * from '.self::getClass().' where id='.$id);
-        $result = $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
-        return $result[0];
-    }
-   
     private static function clear()
     {
         unset($_POST['create']);
