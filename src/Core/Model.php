@@ -22,6 +22,11 @@ class Model
         }
     }
 
+    public static function getAll() {
+        $query = self::getInstance()->query('select * from '.self::getClass());
+        return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
+    }
+
     public static function getInstance()
     {
         if (self::$instance === null) {
@@ -71,7 +76,12 @@ class Model
         return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
     }
 
-  
+    public static function getById($id) {
+        $query = self::getInstance()
+        ->query('select * from '.self::getClass().' where id='.$id);
+        $result = $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
+        return $result[0];
+    }
    
     private static function clear()
     {
