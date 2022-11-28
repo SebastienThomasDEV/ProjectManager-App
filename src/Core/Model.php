@@ -39,16 +39,27 @@ class Model
 
     public static function getByAttribute($name, $value)
     {
-        $query = self::getInstance()->query(
-            'select * from ' .
-                self::getClass() .
-                ' where ' .
-                $name .
-                '=' .
-                "'" .
-                $value .
-                "'"
-        );
-        return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
+    }
+
+    private static function clear()
+    {
+        $return[] = ':id';
+        if (isset($_GET['insert'])) {
+            $return[]['id'] = null;
+        }
+        foreach ($_POST as $key => $value) {
+            $return[0] .= ',:' . $key;
+            $return[1][$key] = htmlspecialchars($value);
+        }
+        return $return;
+    }
+
+    public static function create()
+    {
+        $vars = self::clear();
+        $sql = 'insert into ' . self::getClass() . " values(" . $vars[0] . ")";
+        return self::getInstance()
+            ->prepare($sql)
+            ->execute($vars[1]);
     }
 }

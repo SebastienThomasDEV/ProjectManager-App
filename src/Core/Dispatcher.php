@@ -18,6 +18,9 @@ class Dispatcher
         }
         if (isset($_GET['page'])) {
             switch ($_GET['page']) {
+                case 'createuser':
+                    new UserController();
+                    break;
                 default:
                     new DefaultPage();
                     break;
