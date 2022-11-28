@@ -39,6 +39,7 @@ class UserController
     }
     private function isValid()
     {
+
         $return = '';
         $return .= Validate::ValidateNom(
             $_POST['lastname'],
@@ -55,6 +56,8 @@ class UserController
             $_POST['pwd'],
             $_POST['pwdconfirm']
         );
+
+        $return .= User::newEmail($_POST['email']);
         return $return;
     }
 }
