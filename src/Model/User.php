@@ -7,8 +7,8 @@ use Team\Projectbuilder\Core\Model;
 class User extends Model
 {
     private $id;
-    private $firstname;
-    private $lastname;
+    private $firstName;
+    private $lastName;
     private $email;
     private $pwd;
 
@@ -39,7 +39,7 @@ class User extends Model
 
     public function getFirstName()
     {
-        return $this->firstname;
+        return $this->firstName;
     }
 
     /**
@@ -48,9 +48,9 @@ class User extends Model
      * @return  self
      */
 
-    public function setFirstName($firstname)
+    public function setFirstName($firstName)
     {
-        $this->firstname = $firstname;
+        $this->firstName = $firstName;
 
         return $this;
     }
@@ -60,7 +60,7 @@ class User extends Model
 
     public function getLastName()
     {
-        return $this->lastname;
+        return $this->lastName;
     }
 
     /**
@@ -69,9 +69,9 @@ class User extends Model
      * @return  self
      */
 
-    public function setLastName($lastname)
+    public function setLastName($lastName)
     {
-        $this->lastname = $lastname;
+        $this->lastName = $lastName;
 
         return $this;
     }

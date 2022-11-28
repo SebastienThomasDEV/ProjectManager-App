@@ -2,6 +2,8 @@
 
 namespace Team\Projectbuilder\Model;
 
-class Admin extends User {
+use Team\Projectbuilder\Core\Model;
+
+class Admin extends Model {
     
 }
