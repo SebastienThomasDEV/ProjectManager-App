@@ -17,6 +17,9 @@ class Dispatcher
         }
         if (isset($_GET['page'])) {
             switch ($_GET['page']) {
+                case 'createuser':
+                    new UserController();
+                    break;
                 case 'createproject':
                     new ProjectController();
                     break;

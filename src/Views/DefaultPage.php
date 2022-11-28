@@ -12,4 +12,11 @@ if ($connected !== true):
     <input name='pwd' type='password' placeholder="Your password">
     <input type='submit' name='submit' value='Sign in'>
 </form>
-<?php endif;
+<?php
+echo $message;
+echo $_GET['page'];
+?>
+
+<a href='index.php?page=createuser'>Sign up</a>
+
+

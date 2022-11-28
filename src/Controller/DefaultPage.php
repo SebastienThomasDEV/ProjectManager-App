@@ -18,7 +18,7 @@ class DefaultPage{
         } else {
             $view->setVar('connected', false);
         }
-        $view->setVar('message', 'Bienvenue sur project builder');
+        $view->setVar('message', 'Welcome to project builder');
         $view->render();
     }
 }
