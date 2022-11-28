@@ -16,6 +16,11 @@ class UserController
     public function createUser()
     {
         $view = new Views('createuser', 'Création d\'un compte');
+        if (Security::isConnected()) {
+            $view->setVar('connected', true);
+        } else {
+            header('location: index.php');
+        }
         if (isset($_POST['submit'])) {
             if (($message = $this->isValid()) === '') {
                 unset($_POST['submit']);

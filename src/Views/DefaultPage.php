@@ -13,10 +13,8 @@ if ($connected !== true):
     <input type='submit' name='submit' value='Sign in'>
 </form>
 <?php
-echo $message;
-echo $_GET['page'];
+endif;
 ?>
 
-<a href='index.php?page=createuser'>Sign up</a>
 
 
