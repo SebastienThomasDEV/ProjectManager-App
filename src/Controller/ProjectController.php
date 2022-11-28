@@ -10,9 +10,7 @@ use Team\Projectbuilder\Core\Validate;
 class ProjectController {
 
     public function __construct() {
-        if (isset($_GET['page'])) {
             $this->createProject();
-        }
     }
 
     public function createProject () {
