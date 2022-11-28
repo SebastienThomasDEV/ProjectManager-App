@@ -12,4 +12,9 @@ if ($connected !== true):
     <input name='pwd' type='password' placeholder="Your password">
     <input type='submit' name='submit' value='Sign in'>
 </form>
-<?php endif;
+<?php
+endif;
+?>
+
+
+

@@ -22,26 +22,26 @@ class ProjectController {
         } else {
             header('location: index.php');
         }
-    $view->setVar('submit', 'Create project');
-    $view->setVar('message', 'Create a new project');
-    if (isset($_POST['create'])) {
-        if (($message=$this->isValid()) === '') {
-            if(Project::create()) {
-                $view->setVar('message','New project created successfully');
+        $view->setVar('submit', 'Create project');
+        $view->setVar('message', 'Create a new project');
+        if (isset($_POST['create'])) {
+            if (($message=$this->isValid()) === '') {
+                if(Project::create()) {
+                    $view->setVar('message','New project created successfully',);
+                } else {
+                    $view->setVar('message', 'Error during project creation!');
+                }
             } else {
-                $view->setVar('message', 'Error during project creation!');
+                $view->setVar('message', $message);
             }
-        } else {
-            $view->setVar('message', $message);
+            $view->setVar('projectName',$_POST['projectName']);
         }
-        $view->setVar('projectName',$_POST['projectName']);
-    }
-    $view->render();
+        $view->render();
     }
 
     private function isValid() {
         $return = '';
-        $return .= Validate::ValidateNom($_POST['projectName'], 'Project name is not valid<br>');
+        $return .= Validate::ValidateNom($_POST['projectName'], 'Project name is not valid<br>', 'Enter a project name<br>');
         return $return;
     }
 

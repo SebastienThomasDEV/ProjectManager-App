@@ -4,6 +4,7 @@ namespace Team\Projectbuilder\Core;
 
 use Team\Projectbuilder\Controller\DefaultPage;
 use Team\Projectbuilder\Controller\ProjectController;
+use Team\Projectbuilder\Controller\UserController;
 use Team\Projectbuilder\Core\Security;
 
 class Dispatcher
@@ -17,6 +18,9 @@ class Dispatcher
         }
         if (isset($_GET['page'])) {
             switch ($_GET['page']) {
+                case 'createuser':
+                    new UserController();
+                    break;
                 case 'createproject':
                     new ProjectController();
                     break;
