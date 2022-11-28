@@ -8,9 +8,19 @@ foreach ($tasks as $task) {
     echo $task->getDescription().' ';
     echo $task->getPriority().' ';
     echo $task->getLifecycle().' ';
-    echo $task->getUser()->getFirstName().' ';
-    echo $task->getUser()->getLastName().' ';
-    echo $task->getUser()->getEmail();
+    if($task->getIduser() !== NULL){
+        echo $task->getUser()->getFirstName().' ';
+        echo $task->getUser()->getLastName().' ';
+        echo $task->getUser()->getEmail();
+    } else {
+?>
+    <form method="POST" action="">
+        <input name='adduser' type='submit' value='Add User'>
+        <input name='createuser' type='submit' value='Create User'>
+    </form>
+<?php
+    }
+        
     echo "<a href='index.php?page=".$_GET['page']."&delete=".$task->getId()."'>Supprimer</a> ";
     echo "<a href='index.php?page=".$_GET['page']."&update=".$task->getId()."'>Modifier</a><br>";
 }

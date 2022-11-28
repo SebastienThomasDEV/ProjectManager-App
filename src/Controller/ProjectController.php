@@ -2,6 +2,8 @@
 
 namespace Team\Projectbuilder\Controller;
 
+use Team\Projectbuilder\Model\Task;
+use Team\Projectbuilder\Model\User;
 use Team\Projectbuilder\Model\Project;
 use Team\Projectbuilder\Core\Security;
 use Team\Projectbuilder\Core\Views;
@@ -10,7 +12,11 @@ use Team\Projectbuilder\Core\Validate;
 class ProjectController {
 
     public function __construct() {
+        if (isset($_GET['insert'])) {
             $this->createProject();
+        } else {
+            $this->displayProject();
+        }
     }
 
     public function createProject () {
@@ -34,6 +40,18 @@ class ProjectController {
             }
             $view->setVar('projectName',$_POST['projectName']);
         }
+        $view->render();
+    }
+
+    public function displayProject() {
+        $view = new Views('DisplayProject','Project list');
+        if (Security::isConnected()) {
+            $view->setVar('connected', true);
+        } else {
+            header('location: index.php');
+        }
+        $projects = Project::getAll();
+        $view->setVar('projects',$projects);
         $view->render();
     }
 
