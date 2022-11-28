@@ -62,4 +62,25 @@ class Model
             ->prepare($sql)
             ->execute($vars[1]);
     }
+
+    public static function create()
+    {
+        $vars = self::clear();
+        $sql = 'insert into ' . self::getClass() . " values(" . $vars[0] . ")";
+        return self::getInstance()->prepare($sql)->execute($vars[1]);
+    }
+
+    private static function clear()
+    {
+        unset($_POST['create']);
+        $return[] = ':id';
+        if (isset($_GET['insert'])) {
+            $return[]['id'] = null;
+        }
+        foreach ($_POST as $key => $value) {
+            $return[0] .= ',:' . $key;
+            $return[1][$key] = htmlspecialchars($value);
+        }
+        return $return;
+    }
 }

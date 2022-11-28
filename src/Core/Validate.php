@@ -20,26 +20,27 @@ abstract class Validate
         return $return;
     }
 
+
     public static function ValidateEmail($email)
     {
         $return = '';
         if ($email === '') {
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $return = 'Le mail ne peut pas être vide <br>';
+                $return = 'This field cannot be empty <br>';
             }
         } else {
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $return = 'Le mail est incorrecte <br>';
+                $return = 'Mail is not valid <br>';
             }
         }
         return $return;
     }
 
-    public static function verifyConfirmPassword($pwd, $pwdconfirm)
-    {
+
+    public static function verifyConfirmPassword($pwd,$pwdConfirm) {
         $return = '';
-        if ($pwd !== $pwdconfirm) {
-            $return = 'Les champs mot de passe sont différent';
+        if ($pwd !== $pwdConfirm) {
+            $return = 'The password is not valid';
         }
         return $return;
     }
