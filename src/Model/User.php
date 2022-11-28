@@ -7,7 +7,9 @@ use Team\Projectbuilder\Core\Model;
 class User extends Model
 {
     private $id;
-    private $mail;
+    private $firstname;
+    private $lastname;
+    private $email;
     private $pwd;
 
     /**
@@ -31,25 +33,67 @@ class User extends Model
 
         return $this;
     }
-
     /**
-     * Get the value of mail
+     * Get the value of id
      */
 
-    public function getMail()
+    public function getFirstName()
     {
-        return $this->mail;
+        return $this->firstname;
     }
 
     /**
-     * Set the value of mail
+     * Set the value of id
      *
      * @return  self
      */
 
-    public function setMail($mail)
+    public function setFirstName($firstname)
     {
-        $this->mail = $mail;
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+    /**
+     * Get the value of id
+     */
+
+    public function getLastName()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */
+
+    public function setLastName($lastname)
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of email
+     */
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set the value of email
+     *
+     * @return  self
+     */
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
 
         return $this;
     }

@@ -22,10 +22,10 @@ class Security
     {
         $user = $_POST['user'];
         $pwd = $_POST['pwd'];
-        $searchUser = User::getByAttribute('mail', $user);
+        $searchUser = User::getByAttribute('email', $user);
 
         if (
-            $user === $searchUser[0]->getMail() &&
+            $user === $searchUser[0]->getEmail() &&
             password_verify($_POST['pwd'], $searchUser[0]->getPwd())
         ) {
             session_start();
