@@ -7,6 +7,8 @@ use Team\Projectbuilder\Core\Model;
 class User extends Model
 {
     private $id;
+    private $firstname;
+    private $lastname;
     private $email;
     private $pwd;
 
@@ -28,6 +30,48 @@ class User extends Model
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+    /**
+     * Get the value of id
+     */
+
+    public function getFirstName()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */
+
+    public function setFirstName($firstname)
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+    /**
+     * Get the value of id
+     */
+
+    public function getLastName()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */
+
+    public function setLastName($lastname)
+    {
+        $this->lastname = $lastname;
 
         return $this;
     }
