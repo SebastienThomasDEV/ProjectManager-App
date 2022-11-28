@@ -22,8 +22,9 @@ class Model
         }
     }
 
-    public static function getAll() {
-        $query = self::getInstance()->query('select * from '.self::getClass());
+    public static function getAll()
+    {
+        $query = self::getInstance()->query('select * from ' . self::getClass());
         return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
     }
 
@@ -35,28 +36,31 @@ class Model
         return self::$instance;
     }
 
-    public static function getById($id) {
+    public static function getById($id)
+    {
         $query = self::getInstance()
-        ->query('select * from '.self::getClass().' where id='.$id);
+            ->query('select * from ' . self::getClass() . ' where id=' . $id);
         $result = $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
         return $result[0];
     }
-   
-    public static function deleteById($id) {
-        $sql = "delete from ".self::getClass()." where id=".$id;
+
+    public static function deleteById($id)
+    {
+        $sql = "delete from " . self::getClass() . " where id=" . $id;
         $query = self::getInstance()->exec($sql);
     }
 
-    public static function updateById() {
-        $sql = "update ".self::getClass()." set ";
-        foreach ($_POST as $key=>$value) {
+    public static function updateById()
+    {
+        $sql = "update " . self::getClass() . " set ";
+        foreach ($_POST as $key => $value) {
             if ($key === 'create') {
                 continue;
             }
-            $sql .= $key.'= :'.$key.',';
+            $sql .= $key . '= :' . $key . ',';
         }
-        $sql = substr($sql,0,strlen($sql)-1);
-        $sql .= " where id=".$_GET['update'];
+        $sql = substr($sql, 0, strlen($sql) - 1);
+        $sql .= " where id=" . $_GET['update'];
         $vars = self::clear();
         return self::getInstance()->prepare($sql)->execute($vars[1]);
     }
@@ -70,7 +74,7 @@ class Model
 
     public static function getByAttribute($name, $value)
     {
-        $query = self::getInstance()->query('select * from '.self::getClass().' where '.$name.'='."'".$value."'");
+        $query = self::getInstance()->query('select * from ' . self::getClass() . ' where ' . $name . '=' . "'" . $value . "'");
         return $query->fetchAll(\PDO::FETCH_CLASS, get_called_class());
     }
 
@@ -92,28 +96,24 @@ class Model
     {
         $return = '';
         $users = self::getAll();
-            foreach ($users as $user) {
-                $userarr = (array) $user;
-                foreach ($userarr as $key) {
-                    if ($mail === $key) {
-                        $return = 'Email is already used';
-                    } 
+        foreach ($users as $user) {
+            $userarr = (array) $user;
+            foreach ($userarr as $key) {
+                if ($mail === $key) {
+                    $return = 'Email is already used';
                 }
             }
+        }
         return $return;
     }
 
     public static function create()
-        {
-            $vars = self::clear();
-            $sql = 'insert into ' . self::getClass() . " values(" . $vars[0] . ")";
-            return self::getInstance()->prepare($sql)->execute($vars[1]);
-        }
-
-
+    {
+        $vars = self::clear();
+        echo "<pre>";
+        var_dump($vars);
+        echo "</pre>";
+        $sql = 'insert into ' . self::getClass() . " values(" . $vars[0] . ")";
+        return self::getInstance()->prepare($sql)->execute($vars[1]);
+    }
 }
-
-
-
-
-
