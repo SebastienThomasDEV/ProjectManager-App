@@ -1,5 +1,5 @@
 <?php
-if ($connected !== true):
+if ($connected == true):
 
     echo '<h2>' . $title . '</h2>';
     if (isset($message)) {
@@ -16,6 +16,7 @@ if ($connected !== true):
     <input type='submit' name='submit' value='Create account'>
 </form>
 <?php
-endif; ?>
+endif; 
+?>
 
 
