@@ -7,7 +7,7 @@ if (isset($message)) {
 }
 ?>
 
-<form method="POST" action='index.php?page=<?php echo $_GET['page']; ?>'>
+<form method="POST" action='index.php?page=<?php echo $_GET['page']."&insert=1"; ?>'>
     <input type='text' name='projectName' placeholder='Project name'>
     <input type='submit' name='create' value='<?php echo $submit; ?>'>
 </form>
