@@ -22,7 +22,7 @@ class Dispatcher
                 case 'createuser':
                     new UserController();
                     break;
-                case 'createproject':
+                case 'displayproject':
                     new ProjectController();
                     break;
                 case 'displaytask':
