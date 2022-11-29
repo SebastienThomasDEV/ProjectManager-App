@@ -4,6 +4,10 @@ namespace Team\Projectbuilder\Model;
 
 use Team\Projectbuilder\Core\Model;
 use Team\Projectbuilder\Model\Task;
+use Team\Projectbuilder\Model\User;
+use Team\Projectbuilder\Core\Security;
+use Team\Projectbuilder\Core\Views;
+use Team\Projectbuilder\Core\Validate;
 
 class Project extends Model {
     
