@@ -20,7 +20,6 @@ class ProjectController {
             $this->createProject();
         } elseif (isset($_GET['update'])){
             $this->updateProject();
-            
         } else {
             $this->displayProject();
         }

@@ -14,8 +14,13 @@ class TaskController
 
     public function __construct()
     {
+        if(isset($_GET['delete'])) {
+            Task::deleteById((int)$_GET['delete']);
+        }
         if (isset($_GET['insert'])) {
             $this->createTask();
+        } else if (isset($_GET['update'])) {
+            $this->updateTask();
         } else {
             $this->displayTask();
         }
@@ -63,12 +68,6 @@ class TaskController
             } else {
                 $view->setVar('message', $message);
             }
-            $view->setVar('title', $_POST['title']);
-            $view->setVar('description', $_POST['description']);
-            $view->setVar('priority', $_POST['priority']);
-            $view->setVar('lifeCycle', $_POST['lifeCycle']);
-            $view->setVar('idUser', 'NULL');
-            $view->setVar('idProject', $_GET['idproject']);
         }
         $view->render();
     }
@@ -78,5 +77,33 @@ class TaskController
         $return = '';
         $return .= Validate::ValidateNom($_POST['title'], 'Task title is not valid<br>', 'Enter a task title<br>');
         return $return;
+    }
+
+    public function updateTask() {
+        $view = new Views('CreateTask', 'Update an task');
+        if (Security::isConnected()) {
+            $view->setVar('connected', true);
+        } else {
+            header('location: index.php');
+        }
+        $view->setVar('action','&update='.$_GET['update']);
+        if (isset($_POST['create'])) {
+            if ($message=$this->isValid() === '') {
+                if (Task::updateById()) {
+                    $view->setVar('message', 'Task updated succesfully');
+                } else {
+                    $view->setVar('message', 'An error has occured');
+                }
+            } else {
+                $view->setVar('message', $message);
+            }
+        }
+        $task = Task::getById($_GET['update']);
+        $view->setVar('title',$task->getTitle());
+        $view->setVar('description',$task->getDescription());
+        $view->setVar('priority',$task->getPriority());
+        $view->setVar('lifeCycle',$task->getLifeCycle());
+        $view->setVar('submit', 'update');
+        $view->render();
     }
 }

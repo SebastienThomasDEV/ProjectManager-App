@@ -1,8 +1,8 @@
 <?php
 
-echo "<h2>$title</h2>";
+echo "<h2>$pageTitle</h2>";
 foreach ($projects as $project) {
-    echo "<a href='index.php?page=" . $_GET['page'] . "&idproject=" . $project->getId() . "'>" . $project->getProjectName() . "</a>";
+    echo "<a href='index.php?page=displaytask&idproject=" . $project->getId() . "'>" . $project->getProjectName() . "</a>";
     echo "<a href='index.php?page=" . $_GET['page'] . "&delete=" . $project->getId() . "'>Supprimer</a> ";
     echo "<a href='index.php?page=" . $_GET['page'] . "&update=" . $project->getId() . "'>Modifier</a><br>";
 }
