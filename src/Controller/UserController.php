@@ -11,7 +11,8 @@ class UserController
     public function __construct()
     {
         if(isset($_GET['delete'])) {
-            User::deleteById($_GET['delete']);
+            User::deleteById((int) $_GET['delete']);
+            session_destroy();
         }
         if (isset($_GET['insert'])) {
             $this->createUser();
@@ -57,7 +58,7 @@ class UserController
         } else {
             header('location: index.php');
         }
-        $users = User::getById(2);
+        $users = User::getById(1);
         $view -> setVar('users', $users);
         $view -> render();
     }
@@ -91,7 +92,6 @@ class UserController
         $view->setVar('email',$user->getEmail());
         $view->render();
     }
-
 
     private function isValid()
     {

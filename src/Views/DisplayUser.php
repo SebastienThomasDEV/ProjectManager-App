@@ -1,6 +1,6 @@
 <?php 
 
-echo "<h2>$title</h2>";
+echo "<h2>$pageTitle</h2>";
 echo $users -> getFirstName() ."<br>";
 echo $users -> getLastName() ."<br>";
 echo $users -> getEmail()."<br>";
