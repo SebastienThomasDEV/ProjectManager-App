@@ -7,10 +7,10 @@
     }
     ?>
 
-<form method='POST' action='index.php?page=<?php echo $_GET['page']."&insert=1"; ?>'>
+<form method='POST' action='index.php?page=<?php echo $_GET['page'].$action; ?>'>
     <input name='firstname' type='text' placeholder='First name'>
     <input name='lastname' type='text' placeholder='Last name'>
-    <input name='email' type='text' placeholder='email'>
+    <input name='email' type='text' placeholder='Email'>
     <input name='pwd' type='password' placeholder="Password">
     <input name='pwdconfirm' type='password' placeholder="Confirm password">
     <?php
@@ -20,7 +20,7 @@
     <?php
         endif; 
     ?>
-    <input type='submit' name='submit' value='Create account'>
+    <input type='submit' name='submit' value='<?php echo $submit; ?>'>
 </form>
 
 

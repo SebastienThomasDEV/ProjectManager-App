@@ -47,6 +47,9 @@ class Model
     public static function deleteById($id)
     {
         $sql = "delete from " . self::getClass() . " where id=" . $id;
+        echo "<pre>";
+        var_dump($sql);
+        echo "</pre>";
         $query = self::getInstance()->exec($sql);
     }
 
