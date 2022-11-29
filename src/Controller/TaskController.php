@@ -24,9 +24,6 @@ class TaskController
         } else {
             $this->displayTask();
         }
-        
-        
-        
     }
 
     public function displayTask()
