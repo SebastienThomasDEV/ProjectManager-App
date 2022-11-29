@@ -1,5 +1,5 @@
 <?php
-if ($connected == true):
+
 
     echo '<h2>' . $title . '</h2>';
     if (isset($message)) {
@@ -13,10 +13,15 @@ if ($connected == true):
     <input name='email' type='text' placeholder='email'>
     <input name='pwd' type='password' placeholder="Password">
     <input name='pwdconfirm' type='password' placeholder="Confirm password">
+    <?php
+        if ($connected == true):
+    ?>
+    <p>Will be added to task: placeholder of project: placeholder</p>
+    <?php
+        endif; 
+    ?>
     <input type='submit' name='submit' value='Create account'>
 </form>
-<?php
-endif; 
-?>
+
 
 
