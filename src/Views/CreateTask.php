@@ -7,10 +7,10 @@ if (isset($message)) {
 ?>
 
 
-<form method="POST" action='index.php?page=<?php echo $_GET['page'] . "&idproject=" . $_GET['idproject'] . "&insert=1"; ?>'>
-    <input name='title' type='text' placeholder='Add Task Name'>
-    <input name='description' type='text' placeholder='Add Task Description'>
-    <input name='priority' type='num' placeholder='Add Task Priority'>
-    <input name='lifeCycle' type='text' placeholder='Add Task Lifecycle'>
+<form method="POST" action=''>
+    <input name='title' type='text' placeholder='Add Task Name' value="<?php echo isset($title) ? $title: ''; ?>">
+    <input name='description' type='text' placeholder='Add Task Description' value="<?php echo isset($description) ? $description: ''; ?>">
+    <input name='priority' type='text' placeholder='Add Task Priority' value="<?php echo isset($priority) ? $priority: ''; ?>">
+    <input name='lifeCycle' type='text' placeholder='Add Task Lifecycle' value="<?php echo isset($lifeCycle) ? $lifeCycle: ''; ?>">
     <input type='submit' name='create' value='<?php echo $submit; ?>'>
 </form>
