@@ -66,7 +66,7 @@ class TaskController
             $view->setVar('title', $_POST['title']);
             $view->setVar('description', $_POST['description']);
             $view->setVar('priority', $_POST['priority']);
-            $view->setVar('lifeCycle', $_POST['lifecycle']);
+            $view->setVar('lifeCycle', $_POST['lifeCycle']);
             $view->setVar('idUser', 'NULL');
             $view->setVar('idProject', $_GET['idproject']);
         }

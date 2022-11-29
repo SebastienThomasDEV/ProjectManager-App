@@ -83,11 +83,16 @@ class Model
         unset($_POST['create']);
         $return[] = ':id';
         if (isset($_GET['insert'])) {
-            $return[]['id'] = null;
+            $return[]['id'] = NULL;
         }
         foreach ($_POST as $key => $value) {
             $return[0] .= ',:' . $key;
             $return[1][$key] = htmlspecialchars($value);
+        }
+        if (isset($_GET['idproject'])) {
+            $return[0] .= ',:idProject,:idUser';
+            $return[1]['idProject'] = $_GET['idproject'];
+            $return[1]['idUser'] = NULL;
         }
         return $return;
     }
@@ -110,9 +115,6 @@ class Model
     public static function create()
     {
         $vars = self::clear();
-        echo "<pre>";
-        var_dump($vars);
-        echo "</pre>";
         $sql = 'insert into ' . self::getClass() . " values(" . $vars[0] . ")";
         return self::getInstance()->prepare($sql)->execute($vars[1]);
     }
