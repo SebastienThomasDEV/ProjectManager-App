@@ -19,7 +19,7 @@ class UserController
         if (Security::isConnected()) {
             $view->setVar('connected', true);
         } else {
-            header('location: index.php');
+            $view->setVar('connected', false);
         }
         if (isset($_POST['submit'])) {
             if (($message = $this->isValid()) === '') {
