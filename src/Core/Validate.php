@@ -17,11 +17,6 @@ abstract class Validate
                 $return = $message;
             }
         }
-
-        if($nom !== $pattern){
-            $return = 'it\'s not a name';
-        }
-
         return $return;
     }
 
@@ -47,11 +42,16 @@ abstract class Validate
     public static function verifyConfirmPassword($pwd,$pwdConfirm) {
         $return = '';
         if ($pwd !== $pwdConfirm) {
-            $return = 'The password is not valid <br>';
+            $return = 'The passwords are not the same <br>';
         }
+        return $return;
+    }
+
+    public static function passwordLength($pwd) {
+        $return = '';
         if(strlen($pwd) < 4){
             $return = 'The password must be composed of at least 4 characters <br>';
-        return $return;
         }
+        return $return;
     }
 }

@@ -19,10 +19,10 @@ class Dispatcher
         }
         if (isset($_GET['page'])) {
             switch ($_GET['page']) {
-                case 'createuser':
+                case 'displayuser':
                     new UserController();
                     break;
-                case 'createproject':
+                case 'displayproject':
                     new ProjectController();
                     break;
                 case 'displaytask':

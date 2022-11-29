@@ -8,11 +8,11 @@ class Views
     private $vars;
     private $page;
 
-    public function __construct($content, $title)
+    public function __construct($content, $pageTitle)
     {
         $this->folder = dirname(__FILE__) . '/../Views/Template/';
         $this->page = dirname(__FILE__) . '/../Views/' . $content . '.php';
-        $this->vars['title'] = $title;
+        $this->vars['pageTitle'] = $pageTitle;
     }
 
     private function getHead()
