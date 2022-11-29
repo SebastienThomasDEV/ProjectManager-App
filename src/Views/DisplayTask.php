@@ -1,6 +1,6 @@
 <?php
 
-echo "<h2>$title</h2>";
+echo "<h2>$pageTitle</h2>";
 echo "<h3>" . $project->getProjectName() . "</h3><br>";
 $tasks = $project->getTasks();
 foreach ($tasks as $task) {
@@ -21,7 +21,7 @@ foreach ($tasks as $task) {
 <?php
     }
 
-    echo "<a href='index.php?page=" . $_GET['page'] . "&delete=" . $task->getId() . "'>Supprimer</a> ";
+    echo "<a href='index.php?page=". $_GET['page'] ."&idproject=" . $project->getId() . "&delete=" . $task->getId() . "'>Supprimer</a> ";
     echo "<a href='index.php?page=" . $_GET['page'] . "&update=" . $task->getId() . "'>Modifier</a><br>";
 }
 echo "<a href='index.php?page=" . $_GET['page'] . "&idproject=" . $project->getId() . "&insert=1'>Add new task</a>";
