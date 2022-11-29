@@ -7,7 +7,7 @@ class Model
     private static $dsn = 'mysql:dbname=projectbuilder;host=localhost';
     private static $username = 'me';
     private static $password = '123456';
-    public static $instance = null;
+    public static $instance = NULL;
 
     private function __construct()
     {
@@ -21,7 +21,7 @@ class Model
             echo $e->getMessage();
         }
     }
-
+    
     public static function getAll()
     {
         $query = self::getInstance()->query('select * from ' . self::getClass());
@@ -30,7 +30,7 @@ class Model
 
     public static function getInstance()
     {
-        if (self::$instance === null) {
+        if (self::$instance === NULL) {
             new Model();
         }
         return self::$instance;
@@ -44,9 +44,16 @@ class Model
         return $result[0];
     }
 
+    private static function getClass()
+    {
+        $classe = get_called_class();
+        $classeTab = explode('\\', $classe);
+        return $classeTab[count($classeTab) - 1];
+    }
+
     public static function deleteById($id)
     {
-        $sql = "delete from " . self::getClass() . " where id=" . $id;
+        $sql = "delete from ".self::getClass()." where id=".$id;
         $query = self::getInstance()->exec($sql);
     }
 
@@ -65,12 +72,6 @@ class Model
         return self::getInstance()->prepare($sql)->execute($vars[1]);
     }
 
-    private static function getClass()
-    {
-        $classe = get_called_class();
-        $classeTab = explode('\\', $classe);
-        return $classeTab[count($classeTab) - 1];
-    }
 
     public static function getByAttribute($name, $value)
     {
