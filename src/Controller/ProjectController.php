@@ -12,14 +12,16 @@ use Team\Projectbuilder\Core\Validate;
 class ProjectController {
 
     public function __construct() {
+        if(isset($_GET['delete'])){
+            $this->deleteProject();
+        }
+        
         if (isset($_GET['insert'])) {
             $this->createProject();
         } elseif (isset($_GET['update'])){
             $this->updateProject();
             
-        }elseif(isset($_GET['delete'])){
-            Project::deleteById((int) $_GET['delete']);
-        }else{
+        } else {
             $this->displayProject();
         }
     }
@@ -33,6 +35,7 @@ class ProjectController {
         }
         $view->setVar('submit', 'Create project');
         $view->setVar('message', 'Create a new project');
+        $view->setVar('action','&insert=1');
         if (isset($_POST['create'])) {
             if (($message=$this->isValid()) === '') {
                 if(Project::create()) {
@@ -43,7 +46,6 @@ class ProjectController {
             } else {
                 $view->setVar('message', $message);
             }
-            $view->setVar('projectName',$_POST['projectName']);
         }
         $view->render();
     }
@@ -93,4 +95,19 @@ class ProjectController {
         $view->setVar('submit', 'Update');
         $view->render();
 }
+
+    public function deleteProject(){
+        $project = Project::getById($_GET['delete']);
+        $project->setTasks();
+        $tasks = $project->getTasks();
+        if(count($tasks)!==0){
+            foreach ($tasks as $task) {
+                $arraytask = (array) $task;
+                $id = array_values( $arraytask)[0];
+                Task::deleteById($id);
+            }
+        }
+        Project::deleteById($_GET['delete']);
+    }
+
 }
