@@ -1,0 +1,56 @@
+body {
+    background-color: #0f292f;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    max-width: 18rem;
+    padding-top: 0;
+}
+
+.navbar a {
+    color: #14A098;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 2rem;
+    letter-spacing: 0.1rem;
+    font-size: 1.2rem;
+}
+
+h2 {
+    text-align: center;
+    font-size: 4rem;
+    color: white;
+}
+
+.welcome {
+    padding: 0;
+}
+
+div {
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.sketuveu {
+    display: flex;
+    justify-content: space-around;
+}
+
+input[type="submit"] {
+    background-color: #022140;
+    color: #ffffff;
+    padding: auto;
+    border: none;
+    border-radius: 1.6rem;
+    padding: 0.6rem 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-left: 2.5rem;
+}

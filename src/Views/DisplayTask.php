@@ -1,6 +1,6 @@
 <?php
 
-echo "<h2>$pageTitle</h2>";
+// echo "<h2>$pageTitle</h2>";
 echo "<h3>" . $project->getProjectName() . "</h3><br>";
 $tasks = $project->getTasks();
 foreach ($tasks as $task) {

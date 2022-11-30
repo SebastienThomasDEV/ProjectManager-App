@@ -37,8 +37,6 @@ abstract class Validate
         return $return;
     }
 
-
-
     public static function verifyConfirmPassword($pwd,$pwdConfirm) {
         $return = '';
         if ($pwd !== $pwdConfirm) {
