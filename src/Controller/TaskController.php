@@ -36,13 +36,11 @@ class TaskController
         }
         $view->setVar('submit', 'Create new task');
         $view->setVar('message', 'Task list');
-        //$tasks = Task::getAll();
         $project = Project::getById($_GET['idproject']);
         $project->setTasks();
         foreach ($project->getTasks() as $task) {
             $task->setUser();
         }
-        //$task->setProject();
         $view->setVar('project', $project);
         $view->render();
     }
@@ -58,6 +56,7 @@ class TaskController
 
         $view->setVar('submit', 'Create task');
         $view->setVar('message', 'Create a new task');
+        
         if (isset($_POST['create'])) {
             if (($message = $this->isValid()) === '') {
                 if (Task::create()) {
@@ -75,7 +74,7 @@ class TaskController
     private function isValid()
     {
         $return = '';
-        $return .= Validate::ValidateNom($_POST['title'], 'Task title is not valid<br>', 'Enter a task title<br>');
+        $return .= Validate::newTask($_POST['title'], 'Task title is already used<br>', 'Enter an other task title<br>');
         return $return;
     }
 
@@ -91,7 +90,7 @@ class TaskController
             if ($message=$this->isValid() === '') {
                 if (Task::updateById()) {
                     $view->setVar('message', 'Task updated succesfully');
-                } else {
+                } else {    
                     $view->setVar('message', 'An error has occured');
                 }
             } else {

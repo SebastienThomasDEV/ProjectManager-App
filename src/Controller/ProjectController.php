@@ -5,6 +5,7 @@ namespace Team\Projectbuilder\Controller;
 use Team\Projectbuilder\Model\Task;
 use Team\Projectbuilder\Model\User;
 use Team\Projectbuilder\Model\Project;
+use Team\Projectbuilder\Model\Affectation;
 use Team\Projectbuilder\Core\Security;
 use Team\Projectbuilder\Core\Views;
 use Team\Projectbuilder\Core\Validate;
@@ -39,6 +40,9 @@ class ProjectController {
             if (($message=$this->isValid()) === '') {
                 if(Project::create()) {
                     $view->setVar('message','New project created successfully');
+                    $project=Project::getByAttribute('projectName',$_POST['projectName']);
+                    $idProject = $project[0]->getId();
+                    Affectation::createAffectation($idProject);
                 } else {
                     $view->setVar('message', 'Error during project creation!');
                 }
@@ -47,7 +51,7 @@ class ProjectController {
             }
         }
         $view->render();
-    }
+    } 
 
     public function displayProject() {
         $view = new Views('DisplayProject','Project list');
@@ -56,14 +60,27 @@ class ProjectController {
         } else {
             header('location: index.php');
         }
-        $projects = Project::getAll();
+        $projects = Project::getByAttribute('idAdmin', $_SESSION['id']);
+        echo"<pre>";
+        var_dump($projects);
+        echo"</pre>";
+        $user = User::getById($_SESSION['id']);
+        $user->setAffectation();
+        $projectsParticipant=[];
+        foreach ($user->getAffectations() as $affectation) {
+            echo"<pre>";
+            var_dump($affectation);
+            echo"</pre>";
+        }
+        die();
         $view->setVar('projects',$projects);
+        $view->setVar('projectsParticipant',$projectsParticipant);
         $view->render();
     }
 
     private function isValid() {
         $return = '';
-        $return .= Validate::ValidateNom($_POST['projectName'], 'Project name is not valid<br>', 'Enter a project name<br>');
+        $return .= Validate::existingProject($_POST['projectName']);
         return $return;
     }
 
@@ -95,18 +112,21 @@ class ProjectController {
         $view->render();
 }
 
+//a ameliorer, surement pas besoin de foreach (voire fonction deleteAffectationFromProject dans Model.php)
     public function deleteProject(){
         $project = Project::getById($_GET['delete']);
-        $project->setTasks();
-        $tasks = $project->getTasks();
-        if(count($tasks)!==0){
-            foreach ($tasks as $task) {
-                $arraytask = (array) $task;
-                $id = array_values( $arraytask)[0];
-                Task::deleteById($id);
+        $project->setAffectation();
+        $affectations = $project->getAffectations();
+        if(count($affectations)!==0){
+            foreach ($affectations as $affectation) {
+                $array_affectation = (array) $affectation;
+                $id = array_values($array_affectation)[1];
+                Affectation::deleteAffectationFromProject($id);
             }
         }
         Project::deleteById($_GET['delete']);
+        
     }
 
+    
 }
