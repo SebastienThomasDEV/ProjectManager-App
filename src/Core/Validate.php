@@ -2,7 +2,9 @@
 
 namespace Team\Projectbuilder\Core;
 
-use Team\Projectbuilder\Core\User;
+use Team\Projectbuilder\Model\User;
+use Team\Projectbuilder\Model\Task;
+use Team\Projectbuilder\Model\Project;
 
 abstract class Validate
 {
@@ -21,7 +23,7 @@ abstract class Validate
         }
         return $return;
     }
-
+    
 
     public static function ValidateEmail($email)
     {
@@ -71,10 +73,40 @@ abstract class Validate
         $return = '';
         $users = User::getAll();
         foreach ($users as $user) {
-            $userarr = (array) $user;
-            foreach ($userarr as $key) {
+            $array_user = (array) $user;
+            foreach ($array_user as $key) {
                 if ($mail === $key) {
                     $return = 'Email is already used';
+                }
+            }
+        }
+        return $return;
+    }
+
+    public static function newTask($task)
+    {
+        $return = '';
+        $Tasks = Task::getAll();
+        foreach ($Tasks as $task) {
+            $array_task = (array) $task;
+            foreach ($array_task as $key) {
+                if ($task === $key) {
+                    $return = 'Task title is already used';
+                }
+            }
+        }
+        return $return;
+    }
+
+    public static function existingProject($projectname)
+    {
+        $return = '';
+        $projects= Project::getAll();
+        foreach ($projects as $project) {
+            $array_project = (array) $project;
+            foreach ($array_project as $key) {
+                if ($projectname === $key) {
+                    $return = "The name $projectname is already used, enter a new project name";
                 }
             }
         }

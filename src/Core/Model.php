@@ -57,6 +57,16 @@ class Model
         $query = self::getInstance()->exec($sql);
     }
 
+
+    // a bouger et améliorer
+    public static function deleteAffectationFromProject($id)
+    {
+        $sql = "delete from ".self::getClass()." where idProject=".$id;
+        $query = self::getInstance()->exec($sql);
+    }
+
+    
+
     public static function updateById()
     {
         $sql = "update " . self::getClass() . " set ";
@@ -99,12 +109,27 @@ class Model
             $return[1]['idProject'] = $_GET['idproject'];
             $return[1]['idUser'] = NULL;
         }
+        if (($_GET['page'] == 'displayproject')  ) {
+            if(isset($_GET['update'])!==TRUE) {
+            $return[0] .= ',:idAdmin';
+            $return[1]['idAdmin'] = $_SESSION['id'];    
+            }
+        }
         return $return;
     }
 
     public static function create()
     {
         $vars = self::clear();
+        $sql = 'insert into ' . self::getClass() . " values(" . $vars[0] . ")";
+        return self::getInstance()->prepare($sql)->execute($vars[1]);
+
+    }
+    public static function createAffectation($id) {
+        $vars=[];
+        $vars[0] = ':idUser,:idProject';
+        $vars[1]['idUser'] = $_SESSION['id'];
+        $vars[1]['idProject'] = $id;
         $sql = 'insert into ' . self::getClass() . " values(" . $vars[0] . ")";
         return self::getInstance()->prepare($sql)->execute($vars[1]);
     }

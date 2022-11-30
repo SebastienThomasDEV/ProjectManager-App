@@ -5,6 +5,7 @@ namespace Team\Projectbuilder\Model;
 use Team\Projectbuilder\Core\Model;
 use Team\Projectbuilder\Model\Task;
 use Team\Projectbuilder\Model\User;
+use Team\Projectbuilder\Model\Affectation;
 use Team\Projectbuilder\Core\Security;
 use Team\Projectbuilder\Core\Views;
 use Team\Projectbuilder\Core\Validate;
@@ -14,6 +15,7 @@ class Project extends Model {
     private $id;
     private $projectName;
     private array $tasks;
+    private array $affectations;
 
     /**
      * Get the value of id
@@ -63,6 +65,11 @@ class Project extends Model {
         return $this->tasks;
     }
 
+    public function getAffectations()
+    {
+        return $this->affectations;
+    }
+
     /**
      * Set the value of tasks
      *
@@ -74,6 +81,17 @@ class Project extends Model {
             $this->tasks = Task::getByAttribute('idProject', $this->id);
         } else {
             $this->tasks = $tasks;
+        }
+
+        return $this;
+    }
+
+    public function setAffectation($affectations=NULL) 
+    {
+        if ($affectations === NULL) {
+            $this->affectations = Affectation::getByAttribute('idProject', $this->id);
+        } else {
+            $this->affectations = $affectations;
         }
 
         return $this;
