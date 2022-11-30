@@ -5,7 +5,7 @@ namespace Team\Projectbuilder\Controller;
 use Team\Projectbuilder\Model\Task;
 use Team\Projectbuilder\Model\User;
 use Team\Projectbuilder\Model\Project;
-use Team\Projectbuilder\Model\isAdmin;
+use Team\Projectbuilder\Model\Affectation;
 use Team\Projectbuilder\Core\Security;
 use Team\Projectbuilder\Core\Views;
 use Team\Projectbuilder\Core\Validate;
@@ -19,7 +19,6 @@ class ProjectController {
         
         if (isset($_GET['insert'])) {
             $this->createProject();
-            $this->isAdmin();
         } elseif (isset($_GET['update'])){
             $this->updateProject();
         } else {
@@ -41,6 +40,9 @@ class ProjectController {
             if (($message=$this->isValid()) === '') {
                 if(Project::create()) {
                     $view->setVar('message','New project created successfully');
+                    $project=Project::getByAttribute('projectName',$_POST['projectName']);
+                    $idProject = $project[0]->getId();
+                    Affectation::createAffectation($idProject);
                 } else {
                     $view->setVar('message', 'Error during project creation!');
                 }
@@ -65,7 +67,7 @@ class ProjectController {
 
     private function isValid() {
         $return = '';
-        $return .= Validate::ValidateNom($_POST['projectName'], 'Project name is not valid<br>', 'Enter a project name<br>');
+        $return .= Validate::existingProject($_POST['projectName']);
         return $return;
     }
 
@@ -111,13 +113,7 @@ class ProjectController {
     //     Project::deleteById($_GET['delete']);
     // }
 
-    private function isAdmin() {
-        $test = isAdmin::getAll();
-        echo "<pre>";
-        var_dump($test);
-        echo "</pre>";
-        // $project = Project::getByAttribute($_POST['projectName'], 'Name of the project is');
-    }
+    
 
 
 }

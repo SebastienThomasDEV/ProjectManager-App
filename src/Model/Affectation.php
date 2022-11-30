@@ -7,27 +7,27 @@ use Team\Projectbuilder\Model\Project;
 use Team\Projectbuilder\Model\User;
 
 
-class isAdmin extends Model {
-    private $isAdmin;
-    private $idProject;
+class Affectation extends Model {
     private $idUser;
+    private $idProject;
+
 
     /**
-     * Get the value of isAdmin
+     * Get the value of idUser
      */ 
-    public function getIsAdmin()
+    public function getIdUser()
     {
-        return $this->isAdmin;
+        return $this->idUser;
     }
 
     /**
-     * Set the value of isAdmin
+     * Set the value of idUser
      *
      * @return  self
      */ 
-    public function setIsAdmin($isAdmin)
+    public function setIdUser($idUser)
     {
-        $this->isAdmin = $isAdmin;
+        $this->idUser = $idUser;
 
         return $this;
     }
@@ -49,25 +49,6 @@ class isAdmin extends Model {
     {
         $this->idProject = $idProject;
 
-        return $this;
-    }
-
-    /**
-     * Get the value of idUser
-     */ 
-    public function getIdUser()
-    {
-        return $this->idUser;
-    }
-
-    /**
-     * Set the value of idUser
-     *
-     * @return  self
-     */ 
-    public function setIdUser($idUser)
-    {
-        $this->idUser = $idUser;
         return $this;
     }
 }

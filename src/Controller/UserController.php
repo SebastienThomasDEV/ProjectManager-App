@@ -61,8 +61,7 @@ class UserController
         } else {
             header('location: index.php');
         }
-        $users = User::getById(1);
-        //$users = User::getById($_SESSION['id']);
+        $users = User::getById($_SESSION['id']);
         $view -> setVar('users', $users);
         $view -> render();
     }

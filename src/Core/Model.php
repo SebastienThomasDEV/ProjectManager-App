@@ -99,6 +99,10 @@ class Model
             $return[1]['idProject'] = $_GET['idproject'];
             $return[1]['idUser'] = NULL;
         }
+        if ($_GET['page'] == 'displayproject') {
+            $return[0] .= ',:idAdmin';
+            $return[1]['idAdmin'] = $_SESSION['id'];
+        }
         return $return;
     }
 
@@ -106,6 +110,15 @@ class Model
     {
         $vars = self::clear();
         $sql = 'insert into ' . self::getClass() . " values(" . $vars[0] . ")";
+        return self::getInstance()->prepare($sql)->execute($vars[1]);
+    }
+    public static function createAffectation($id) {
+        $vars=[];
+        $vars[0] = ':idUser,:idProject';
+        $vars[1]['idUser'] = $_SESSION['id'];
+        $vars[1]['idProject'] = $id;
+        $sql = 'insert into ' . self::getClass() . " values(" . $vars[0] . ")";
+        var_dump($sql);
         return self::getInstance()->prepare($sql)->execute($vars[1]);
     }
 }
