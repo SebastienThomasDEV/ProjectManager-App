@@ -51,4 +51,6 @@ class Affectation extends Model {
 
         return $this;
     }
+
+    
 }

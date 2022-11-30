@@ -58,6 +58,7 @@ class TaskController
 
         $view->setVar('submit', 'Create task');
         $view->setVar('message', 'Create a new task');
+        
         if (isset($_POST['create'])) {
             if (($message = $this->isValid()) === '') {
                 if (Task::create()) {
@@ -91,7 +92,7 @@ class TaskController
             if ($message=$this->isValid() === '') {
                 if (Task::updateById()) {
                     $view->setVar('message', 'Task updated succesfully');
-                } else {
+                } else {    
                     $view->setVar('message', 'An error has occured');
                 }
             } else {

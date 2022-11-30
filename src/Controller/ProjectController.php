@@ -14,7 +14,7 @@ class ProjectController {
 
     public function __construct() {
         if(isset($_GET['delete'])){
-            Project::deleteById((int)$_GET['delete']);
+            $this->deleteProject();
         }
         
         if (isset($_GET['insert'])) {
@@ -51,7 +51,7 @@ class ProjectController {
             }
         }
         $view->render();
-    }
+    } 
 
     public function displayProject() {
         $view = new Views('DisplayProject','Project list');
@@ -99,21 +99,21 @@ class ProjectController {
         $view->render();
 }
 
-    // public function deleteProject(){
-    //     $project = Project::getById($_GET['delete']);
-    //     $project->setTasks();
-    //     $tasks = $project->getTasks();
-    //     if(count($tasks)!==0){
-    //         foreach ($tasks as $task) {
-    //             $arraytask = (array) $task;
-    //             $id = array_values( $arraytask)[0];
-    //             Task::deleteById($id);
-    //         }
-    //     }
-    //     Project::deleteById($_GET['delete']);
-    // }
+//a ameliorer, surement pas besoin de foreach (voire fonction deleteAffectationFromProject dans Model.php)
+    public function deleteProject(){
+        $project = Project::getById($_GET['delete']);
+        $project->setAffectation();
+        $affectations = $project->getAffectations();
+        if(count($affectations)!==0){
+            foreach ($affectations as $affectation) {
+                $array_affectation = (array) $affectation;
+                $id = array_values($array_affectation)[1];
+                Affectation::deleteAffectationFromProject($id);
+            }
+        }
+        Project::deleteById($_GET['delete']);
+        
+    }
 
     
-
-
 }
