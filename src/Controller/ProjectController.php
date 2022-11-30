@@ -13,7 +13,7 @@ class ProjectController {
 
     public function __construct() {
         if(isset($_GET['delete'])){
-            $this->deleteProject();
+            Project::deleteById((int)$_GET['delete']);
         }
         
         if (isset($_GET['insert'])) {
@@ -95,18 +95,18 @@ class ProjectController {
         $view->render();
 }
 
-    public function deleteProject(){
-        $project = Project::getById($_GET['delete']);
-        $project->setTasks();
-        $tasks = $project->getTasks();
-        if(count($tasks)!==0){
-            foreach ($tasks as $task) {
-                $arraytask = (array) $task;
-                $id = array_values( $arraytask)[0];
-                Task::deleteById($id);
-            }
-        }
-        Project::deleteById($_GET['delete']);
-    }
+    // public function deleteProject(){
+    //     $project = Project::getById($_GET['delete']);
+    //     $project->setTasks();
+    //     $tasks = $project->getTasks();
+    //     if(count($tasks)!==0){
+    //         foreach ($tasks as $task) {
+    //             $arraytask = (array) $task;
+    //             $id = array_values( $arraytask)[0];
+    //             Task::deleteById($id);
+    //         }
+    //     }
+    //     Project::deleteById($_GET['delete']);
+    // }
 
 }
