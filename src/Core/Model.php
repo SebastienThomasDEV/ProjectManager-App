@@ -122,15 +122,6 @@ class Model
     {
         $vars = self::clear();
         $sql = 'insert into ' . self::getClass() . " values(" . $vars[0] . ")";
-        echo "<pre>";
-        var_dump($sql);
-        echo "</pre>";
-        echo "<pre>";
-        var_dump($vars[0]);
-        echo "</pre>";
-        echo "<pre>";
-        var_dump($vars[1]);
-        echo "</pre>";
         return self::getInstance()->prepare($sql)->execute($vars[1]);
 
     }

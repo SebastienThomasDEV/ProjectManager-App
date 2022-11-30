@@ -60,8 +60,21 @@ class ProjectController {
         } else {
             header('location: index.php');
         }
-        $projects = Project::getAll();
+        $projects = Project::getByAttribute('idAdmin', $_SESSION['id']);
+        echo"<pre>";
+        var_dump($projects);
+        echo"</pre>";
+        $user = User::getById($_SESSION['id']);
+        $user->setAffectation();
+        $projectsParticipant=[];
+        foreach ($user->getAffectations() as $affectation) {
+            echo"<pre>";
+            var_dump($affectation);
+            echo"</pre>";
+        }
+        die();
         $view->setVar('projects',$projects);
+        $view->setVar('projectsParticipant',$projectsParticipant);
         $view->render();
     }
 

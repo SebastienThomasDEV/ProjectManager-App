@@ -7,6 +7,7 @@ use Team\Projectbuilder\Model\Project;
 use Team\Projectbuilder\Model\User;
 
 
+
 class Affectation extends Model {
     private $idUser;
     private $idProject;

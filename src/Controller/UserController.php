@@ -136,8 +136,11 @@ class UserController
                 'First name is not correct <br>',
                 'The field "first name" cannot be empty <br>'
             );
-            $return .= Validate::ValidateEmail($_POST['email']);
-            $return .= Validate::newEmail($_POST['email']);
+            if($_SESSION['email']!=$_POST['email']){
+                $return .= Validate::ValidateEmail($_POST['email']);
+                $return .= Validate::newEmail($_POST['email']);    
+            }
+            
         }
 
         if (isset($_GET['updatepwd'])){

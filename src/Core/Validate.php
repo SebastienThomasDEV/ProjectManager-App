@@ -3,6 +3,7 @@
 namespace Team\Projectbuilder\Core;
 
 use Team\Projectbuilder\Model\User;
+use Team\Projectbuilder\Model\Task;
 use Team\Projectbuilder\Model\Project;
 
 abstract class Validate
@@ -22,6 +23,7 @@ abstract class Validate
         }
         return $return;
     }
+    
 
     public static function ValidateEmail($email)
     {
@@ -75,6 +77,21 @@ abstract class Validate
             foreach ($array_user as $key) {
                 if ($mail === $key) {
                     $return = 'Email is already used';
+                }
+            }
+        }
+        return $return;
+    }
+
+    public static function newTask($task)
+    {
+        $return = '';
+        $Tasks = Task::getAll();
+        foreach ($Tasks as $task) {
+            $array_task = (array) $task;
+            foreach ($array_task as $key) {
+                if ($task === $key) {
+                    $return = 'Task title is already used';
                 }
             }
         }

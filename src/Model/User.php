@@ -3,6 +3,7 @@
 namespace Team\Projectbuilder\Model;
 
 use Team\Projectbuilder\Core\Model;
+use Team\Projectbuilder\Model\Affectation;
 
 class User extends Model
 {
@@ -11,6 +12,7 @@ class User extends Model
     private $lastName;
     private $email;
     private $pwd;
+    private array $affectations;    
 
     /**
      * Get the value of id
@@ -119,4 +121,21 @@ class User extends Model
 
         return $this;
     }
+
+    public function getAffectations()
+    {
+        return $this->affectations;
+    }
+
+    public function setAffectation($affectations=NULL) 
+    {
+        if ($affectations === NULL) {
+            $this->affectations = Affectation::getByAttribute('idUser', $this->id);
+        } else {
+            $this->affectations = $affectations;
+        }
+
+        return $this;
+    }
+
 }
