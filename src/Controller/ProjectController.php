@@ -5,6 +5,7 @@ namespace Team\Projectbuilder\Controller;
 use Team\Projectbuilder\Model\Task;
 use Team\Projectbuilder\Model\User;
 use Team\Projectbuilder\Model\Project;
+use Team\Projectbuilder\Model\isAdmin;
 use Team\Projectbuilder\Core\Security;
 use Team\Projectbuilder\Core\Views;
 use Team\Projectbuilder\Core\Validate;
@@ -18,6 +19,7 @@ class ProjectController {
         
         if (isset($_GET['insert'])) {
             $this->createProject();
+            $this->isAdmin();
         } elseif (isset($_GET['update'])){
             $this->updateProject();
         } else {
@@ -108,5 +110,14 @@ class ProjectController {
     //     }
     //     Project::deleteById($_GET['delete']);
     // }
+
+    private function isAdmin() {
+        $test = isAdmin::getAll();
+        echo "<pre>";
+        var_dump($test);
+        echo "</pre>";
+        // $project = Project::getByAttribute($_POST['projectName'], 'Name of the project is');
+    }
+
 
 }
