@@ -2,6 +2,8 @@
 
 namespace Team\Projectbuilder\Core;
 
+use Team\Projectbuilder\Core\User;
+
 abstract class Validate
 {
     public static function ValidateNom($nom, $message, $messagevide)
@@ -51,6 +53,30 @@ abstract class Validate
         $return = '';
         if(strlen($pwd) < 4){
             $return = 'The password must be composed of at least 4 characters <br>';
+        }
+        return $return;
+    }
+
+    public static function verifyUpdatePassword($pwd,$pwdConfirm) {
+        $return = '';
+        $verif = password_verify($pwd, $pwdConfirm);
+        if ($verif !== TRUE) {
+            $return = 'Your current password is incorrect. Try again<br>';
+        }
+        return $return;
+    }
+    
+    public static function newEmail($mail)
+    {
+        $return = '';
+        $users = User::getAll();
+        foreach ($users as $user) {
+            $userarr = (array) $user;
+            foreach ($userarr as $key) {
+                if ($mail === $key) {
+                    $return = 'Email is already used';
+                }
+            }
         }
         return $return;
     }

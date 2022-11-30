@@ -67,7 +67,11 @@ class Model
             $sql .= $key . '= :' . $key . ',';
         }
         $sql = substr($sql, 0, strlen($sql) - 1);
-        $sql .= " where id=" . $_GET['update'];
+        if(isset($_GET['updatepwd'])){
+            $sql .= " where id=" . $_GET['updatepwd'];    
+        } else {
+            $sql .= " where id=" . $_GET['update'];    
+        }
         $vars = self::clear();
         return self::getInstance()->prepare($sql)->execute($vars[1]);
     }
@@ -94,21 +98,6 @@ class Model
             $return[0] .= ',:idProject,:idUser';
             $return[1]['idProject'] = $_GET['idproject'];
             $return[1]['idUser'] = NULL;
-        }
-        return $return;
-    }
-
-    public static function newEmail($mail)
-    {
-        $return = '';
-        $users = self::getAll();
-        foreach ($users as $user) {
-            $userarr = (array) $user;
-            foreach ($userarr as $key) {
-                if ($mail === $key) {
-                    $return = 'Email is already used';
-                }
-            }
         }
         return $return;
     }
