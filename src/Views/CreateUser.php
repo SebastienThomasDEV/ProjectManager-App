@@ -7,18 +7,27 @@
     ?>
 
 <form method='POST' action='index.php?page=<?php echo $_GET['page'].$action; ?>'>
-    <input name='firstname' type='text' placeholder='First name'>
-    <input name='lastname' type='text' placeholder='Last name'>
-    <input name='email' type='text' placeholder='Email'>
-    <input name='pwd' type='password' placeholder="Password">
-    <input name='pwdconfirm' type='password' placeholder="Confirm password">
     <?php
-        if ($connected == true):
+        if (isset($_GET['update']) || isset($_GET['insert']) ):
     ?>
-    <p>Will be added to task: placeholder of project: placeholder</p>
+    <input name='firstname' type='text' placeholder='First name' value="<?php echo isset($firstName) ? $firstName: ''; ?>">
+    <input name='lastname' type='text' placeholder='Last name'value="<?php echo isset($lastName) ? $lastName: ''; ?>">
+    <input name='email' type='text' placeholder='Email' value="<?php echo isset($email) ? $email: ''; ?>">
+    <?php
+        endif; 
+        if (isset($_GET['updatepwd'])):
+    ?>
+    <input name='oldpwd' type='password' placeholder="Current password" >
+    <?php
+        endif; 
+        if (isset($_GET['updatepwd'])|| isset($_GET['insert'])):
+    ?>
+    <input name='pwd' type='password' placeholder="New password" >
+    <input name='pwdconfirm' type='password' placeholder="Confirm new password">
     <?php
         endif; 
     ?>
+    
     <input type='submit' name='submit' value='<?php echo $submit; ?>'>
 </form>
 
