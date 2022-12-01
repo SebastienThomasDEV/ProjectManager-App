@@ -6,7 +6,6 @@ use Team\Projectbuilder\Controller\DefaultPage;
 use Team\Projectbuilder\Controller\ProjectController;
 use Team\Projectbuilder\Controller\UserController;
 use Team\Projectbuilder\Controller\TaskController;
-use Team\Projectbuilder\Core\Security;
 
 class Dispatcher
 {

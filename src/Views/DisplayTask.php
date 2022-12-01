@@ -44,19 +44,26 @@ if ($idAdmin == $_SESSION['id']) {
 ?>
 
 <h3>User list</h3>
-<ul class="list_task">
+
+<?php
+if (isset($message)) {
+    echo '<div>' . $message . '</div>';
+}
+?>
+<ul class='list_task'>
     <?php
     foreach ($users as $user) {
         echo "<li>" . $user->getFirstName() . $user->getLastName() . $user->getEmail() . "</li>";
     }
-    if ($idAdmin == $_SESSION['id']):
+    if ($idAdmin == $_SESSION['id']) :
     ?>
-    <form class="addUserToProject" method="POST" action="">
-        <input name='adduser' type='submit' value='Add user to project'>
-    </form>
-    
-    <a class="list_task" href='index.php?page=displayuser&insert=1'>Create User</a>
-    
+        <form class="addUserToProject" method="POST" action="">
+            <input name='email' type='email' placeholder='Enter an email'>
+            <input name='adduser' type='submit' value='Add user to project'>
+        </form>
+
+        <a href='index.php?page=displayuser&insert=1'>Create User</a>
+
     <?php
     endif;
     ?>

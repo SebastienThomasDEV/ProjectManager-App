@@ -136,9 +136,14 @@ class Model
 
     public static function updateAssignedUser($idUser, $idTask)
     {
-        $sql = "update Task set idUser=" . $idUser . " where id=" . $idTask;;
+        $sql = "update Task set idUser=" . $idUser . " where id=" . $idTask;
         return self::getInstance()->exec($sql);
+    }
 
-        //update task set idUser = $idUser where id=idTask
+    public static function addUser($idUser, $idProject)
+    {
+        
+        $sql = "insert into affectation (idUser, idProject) VALUES (".$idUser."," .$idProject.")";
+        return self::getInstance()->exec($sql);
     }
 }

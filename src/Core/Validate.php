@@ -110,4 +110,19 @@ abstract class Validate
         }
         return $return;
     }
+
+
+    public static function addUserToProject($mail) {
+        $return = 'User does not exist';
+        $users = User::getAll();
+        foreach ($users as $user) {
+            $array_user = (array) $user;
+            foreach ($array_user as $key) {
+                if ($mail === $key) {
+                    $return = '';
+                }
+            }
+        }
+        return $return;
+    }
 }
