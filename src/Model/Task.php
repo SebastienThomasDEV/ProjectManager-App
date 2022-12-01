@@ -7,7 +7,8 @@ use Team\Projectbuilder\Model\Project;
 use Team\Projectbuilder\Model\User;
 
 
-class Task extends Model{
+class Task extends Model
+{
 
     private $id;
     private $priority;
@@ -21,7 +22,7 @@ class Task extends Model{
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -31,7 +32,7 @@ class Task extends Model{
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -41,7 +42,7 @@ class Task extends Model{
 
     /**
      * Get the value of priority
-     */ 
+     */
     public function getPriority()
     {
         return $this->priority;
@@ -51,7 +52,7 @@ class Task extends Model{
      * Set the value of priority
      *
      * @return  self
-     */ 
+     */
     public function setPriority($priority)
     {
         $this->priority = $priority;
@@ -61,7 +62,7 @@ class Task extends Model{
 
     /**
      * Get the value of lifeCycle
-     */ 
+     */
     public function getLifeCycle()
     {
         return $this->lifeCycle;
@@ -71,7 +72,7 @@ class Task extends Model{
      * Set the value of lifeCycle
      *
      * @return  self
-     */ 
+     */
     public function setLifeCycle($lifeCycle)
     {
         $this->lifeCycle = $lifeCycle;
@@ -81,7 +82,7 @@ class Task extends Model{
 
     /**
      * Get the value of title
-     */ 
+     */
     public function getTitle()
     {
         return $this->title;
@@ -91,7 +92,7 @@ class Task extends Model{
      * Set the value of title
      *
      * @return  self
-     */ 
+     */
     public function setTitle($title)
     {
         $this->title = $title;
@@ -101,7 +102,7 @@ class Task extends Model{
 
     /**
      * Get the value of description
-     */ 
+     */
     public function getDescription()
     {
         return $this->description;
@@ -111,7 +112,7 @@ class Task extends Model{
      * Set the value of description
      *
      * @return  self
-     */ 
+     */
     public function setDescription($description)
     {
         $this->description = $description;
@@ -121,7 +122,7 @@ class Task extends Model{
 
     /**
      * Get the value of idProject
-     */ 
+     */
     public function getIdProject()
     {
         return $this->idProject;
@@ -131,7 +132,7 @@ class Task extends Model{
      * Set the value of idProject
      *
      * @return  self
-     */ 
+     */
     public function setIdProject($idProject)
     {
         $this->idProject = $idProject;
@@ -141,7 +142,7 @@ class Task extends Model{
 
     /**
      * Get the value of idUser
-     */ 
+     */
     public function getIdUser()
     {
         return $this->idUser;
@@ -151,7 +152,7 @@ class Task extends Model{
      * Set the value of idUser
      *
      * @return  self
-     */ 
+     */
     public function setIdUser($idUser)
     {
         $this->idUser = $idUser;
@@ -161,7 +162,7 @@ class Task extends Model{
 
     /**
      * Get the value of user
-     */ 
+     */
     public function getUser()
     {
         return $this->user;
@@ -171,8 +172,8 @@ class Task extends Model{
      * Set the value of user
      *
      * @return  self
-     */ 
-    public function setUser($user=NULL)
+     */
+    public function setUser($user = NULL)
     {
         if ($this->idUser !== NULL && $user === NULL) {
             $this->user = User::getById($this->idUser);
@@ -186,7 +187,7 @@ class Task extends Model{
 
     /**
      * Get the value of project
-     */ 
+     */
     public function getProject()
     {
         return $this->project;
@@ -196,7 +197,7 @@ class Task extends Model{
      * Set the value of project
      *
      * @return  self
-     */ 
+     */
     public function setProject($project = NULL)
     {
         if ($this->idProject !== NULL && $project === NULL) {
