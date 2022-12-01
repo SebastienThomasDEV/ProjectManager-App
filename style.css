@@ -1,0 +1,220 @@
+body {
+    background-color: #123239;
+    margin: 0;
+    min-height: 100%;
+    width: 100%;
+    font-family: 'arcon', Calibri, Arial, sans-serif, serif;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    background-color: #0f292f;
+    width: 100%;
+    margin-bottom: 5em;
+}
+
+.logo {
+    max-width: 18rem;
+    padding: 0.2rem;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0f292f;
+    width: 100%;
+}
+
+nav a {
+    display: flex;
+    color: #CCCCCC;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    font-size: 1.2rem;
+    padding: 0 1rem;
+}
+
+nav a:hover {
+    color: #14A098;
+    font-weight: 700;
+}
+
+.logged {
+    color: #CCCCCC;
+    font-size: 1.2rem;
+    margin: 0 1rem;
+}
+
+/* melcome message*/
+div {
+    color: #CCCCCC;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+/*Titles on the top of the page*/
+h2 {
+    text-align: center;
+    margin: 1em;
+    font-size: 3rem;
+    font-weight: 500;
+    color: #950740;
+    letter-spacing: 0.2rem;
+
+}
+
+/*Changing forms inputs apperance*/
+input[type="submit"] {
+    background-color: #14A098;
+    color: #CCCCCC;
+    font-weight: 600;
+    padding: auto;
+    border: none;
+    border-radius: 1.6rem;
+    padding: 0.6rem 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+input[type='text'] {
+    height: 1rem;
+    padding: 0.6rem;
+    border: 0;
+    border-radius: 10px;
+}
+
+input[type='password'] {
+    height: 1rem;
+    padding: 0.6rem;
+    border: 0;
+    border-radius: 10px;
+}
+
+
+/*Classes in file: Views/DefaultPage START here*/
+.welcome {
+    margin-top: 2em;
+    letter-spacing: 0.1rem;
+    font-size: 4rem;
+}
+
+.connection {
+    margin: 8em 10em 1em 10em;
+    display: flex;
+    justify-content: space-around;
+}
+
+.newUser {
+    margin-left: 15em;
+    color: #14A098;
+    text-decoration: none;
+}
+
+.newUser:hover {
+    font-weight: 600;
+}
+
+.forgottenPassword {
+    color: #14A098;
+    text-decoration: none;
+}
+
+.forgottenPassword:hover {
+    font-weight: 600;
+}
+
+/*Classes in file: Views/DefaultPage FINISH here*/
+
+
+/*Classes in files CreateUser and DisplayProject START here*/
+
+.newUserAccount {
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem 1rem;
+}
+
+.newUserAccountSubmitButton {
+    justify-content: center;
+}
+
+
+.list_task {
+    text-decoration: none;
+    color: #CCCCCC;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 3rem;
+    list-style: none;
+    padding-left: 0;
+}
+
+.list_task:hover {
+    font-weight: 600;
+}
+
+h3 {
+    text-align: center;
+    color: #950740;
+    font-size: 30px;
+}
+
+.addUserToProject {
+    display: flex;
+    justify-content: center;
+    color: #CCCCCC;
+    text-decoration: none;
+    margin: 2em;
+}
+
+/*Classes in files CreateUser and DisplayTask FINISH here*/
+
+
+/*Classes in CreateTask START here*/
+.create_task {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.addTaskPriority {
+    height: 1rem;
+    padding: 0.6rem;
+    border: 0;
+    border-radius: 10px;
+}
+
+.taskLifeCycle {
+    height: 2.2rem;
+    padding: 0.6rem;
+    border: 0;
+    border-radius: 10px;
+}
+
+/*Classes in CreateTask FINISH here*/
+
+
+/*Classes in DisplayUser START here*/
+.class_user {
+    text-decoration: none;
+    color: #CCCCCC;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+.class_user:hover {
+    font-weight: 600;
+}
+
+.real_project {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}

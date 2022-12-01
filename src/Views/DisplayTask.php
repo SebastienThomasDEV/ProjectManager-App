@@ -5,7 +5,7 @@ echo "<h3>$pageTitle</h3>";
 $tasks = $project->getTasks();
 
 foreach ($tasks as $task) {
-    echo $task->getTitle() . ' ';
+    echo "<div>".$task->getTitle() . "</div>";
     echo $task->getDescription() . ' ';
     echo $task->getPriority() . ' ';
     echo $task->getLifecycle() . ' ';
@@ -15,7 +15,7 @@ foreach ($tasks as $task) {
         echo $task->getUser()->getEmail();
     } else if ($idAdmin == $_SESSION['id']) {
 ?>
-        <form method="POST" action='index.php?page=<?php echo $_GET['page'] . "&idproject=" . $project->getId() . "&updatetask=" . $task->getId(); ?>' id="selectuser<?php echo $task->getID(); ?>">
+        <form class="list_task" method="POST" action='index.php?page=<?php echo $_GET['page'] . "&idproject=" . $project->getId() . "&updatetask=" . $task->getId(); ?>' id="selectuser<?php echo $task->getID(); ?>">
             <input name='assignuser' type='submit' value='Assign a user to this task'>
         </form>
         <select name="users_list" form="selectuser<?php echo $task->getID(); ?>">
@@ -30,31 +30,34 @@ foreach ($tasks as $task) {
 <?php
     }
     if ($idAdmin == $_SESSION['id']) {
-        echo "<a href='index.php?page=" . $_GET['page'] . "&idproject=" . $project->getId() . "&delete=" . $task->getId() . "'>Delete</a> ";
-        echo "<a href='index.php?page=" . $_GET['page'] . "&update=" . $task->getId() . "'>Modify</a><br>";
+        echo "<a class=\"list_task\" href='index.php?page=" . $_GET['page'] . "&idproject=" . $project->getId() . "&delete=" . $task->getId() . "'>Delete</a> ";
+        echo "<a class=\"list_task\" href='index.php?page=" . $_GET['page'] . "&update=" . $task->getId() . "'>Modify</a><br>";
     }
+    
 }
+
 if ($idAdmin == $_SESSION['id']) {
-    echo "<a href='index.php?page=" . $_GET['page'] . "&idproject=" . $project->getId() . "&insert=1'>Add new task</a>";
+    echo "<a class=\"list_task\" href='index.php?page=" . $_GET['page'] . "&idproject=" . $project->getId() . "&insert=1'>Add new task</a>";
 }
 
 
 ?>
 
 <h3>User list</h3>
+
 <?php
 if (isset($message)) {
     echo '<div>' . $message . '</div>';
 }
 ?>
-<ul>
+<ul class='list_task'>
     <?php
     foreach ($users as $user) {
         echo "<li>" . $user->getFirstName() . $user->getLastName() . $user->getEmail() . "</li>";
     }
     if ($idAdmin == $_SESSION['id']) :
     ?>
-        <form method="POST" action="">
+        <form class="addUserToProject" method="POST" action="">
             <input name='email' type='email' placeholder='Enter an email'>
             <input name='adduser' type='submit' value='Add user to project'>
         </form>

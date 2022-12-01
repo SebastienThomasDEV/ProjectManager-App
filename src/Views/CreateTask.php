@@ -7,12 +7,12 @@ if (isset($message)) {
 ?>
 
 
-<form method="POST" action='' id="taskform">
+<form class="create_task" method="POST" action='' id="taskform">
     <input name='title' type='text' placeholder='Add Task Name' value="<?= isset($title) ? $title: ''; ?>">
     <input name='description' type='text' placeholder='Add Task Description' value="<?= isset($description) ? $description: ''; ?>">
-    <input name='priority' type='number' placeholder='Add Task Priority' value="<?= isset($priority) ? $priority: ''; ?>">
-    <select name="lifeCycle" form="taskform">
-        <option value="started">Started</option>
+    <input class="addTaskPriority" name='priority' type='number' placeholder='Add Task Priority' value="<?= isset($priority) ? $priority: ''; ?>">
+    <select class="taskLifeCycle" name="lifeCycle" form="taskform">
+        <option value="started">Start</option>
         <option value="inprogress">In progress</option>
         <option value="finished">Finished</option>
     </select>

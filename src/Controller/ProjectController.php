@@ -58,7 +58,7 @@ class ProjectController
 
     public function displayProject()
     {
-        $view = new Views('DisplayProject', 'Project list');
+        $view = new Views('DisplayProject', 'Projects you created'); //title in projects tab
         if (Security::isConnected()) {
             $view->setVar('connected', true);
         } else {
