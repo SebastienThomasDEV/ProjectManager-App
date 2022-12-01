@@ -46,9 +46,15 @@ if ($idAdmin == $_SESSION['id']) {
     foreach ($users as $user) {
         echo "<li>" . $user->getFirstName() . $user->getLastName() . $user->getEmail() . "</li>";
     }
+    if ($idAdmin == $_SESSION['id']):
     ?>
     <form method="POST" action="">
         <input name='adduser' type='submit' value='Add user to project'>
     </form>
+    
     <a href='index.php?page=displayuser&insert=1'>Create User</a>
+    
+    <?php
+    endif;
+    ?>
 </ul>

@@ -41,7 +41,6 @@ class TaskController
         } else {
             header('location: index.php');
         }
-        var_dump($_POST);
         $view->setVar('submit', 'Create new task');
         $view->setVar('message', 'Task list');
         $project = Project::getById($_GET['idproject']);
