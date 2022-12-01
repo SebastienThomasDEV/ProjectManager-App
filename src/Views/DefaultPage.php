@@ -13,7 +13,7 @@ if ($connected !== true):
     <a href="" class="forgottenPassword">Forgot password?</a>
     <input type='submit' name='submit' value='Sign in'>
 </form>
-<a href="index.php?page=displayuser&insert=1" class="newUser">New user? Sign in</a>
+<a href="index.php?page=displayuser&insert=1" class="newUser">New user? Create an account</a>
 
 <?php
 endif;

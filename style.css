@@ -6,18 +6,17 @@ body {
     font-family: 'arcon', Calibri, Arial, sans-serif, serif;
 }
 
-/* .container {
+header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     background-color: #0f292f;
-} */
+    width: 100%;
+    margin-bottom: 5em;
+}
 
 .logo {
     max-width: 18rem;
     padding: 0.2rem;
-    /* position: absolute;
-    left: 1rem; */
 }
 
 nav {
@@ -25,19 +24,22 @@ nav {
     justify-content: space-between;
     align-items: center;
     background-color: #0f292f;
+    width: 100%;
 }
 
-.navbar a {
+nav a {
     display: flex;
     color: #CCCCCC;
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 0.1rem;
     font-size: 1.2rem;
+    padding: 0 1rem;
 }
 
-.navbar a:hover {
+nav a:hover {
     color: #14A098;
+    font-weight: 700;
 }
 
 .logged {
@@ -46,7 +48,7 @@ nav {
     margin: 0 1rem;
 }
 
-/* div = messages after action*/
+/* melcome message*/
 div {
     color: #CCCCCC;
     font-size: 2rem;
@@ -57,10 +59,11 @@ div {
 /*Titles on the top of the page*/
 h2 {
     text-align: center;
-    margin: 2em 1em;
+    margin: 1em;
     font-size: 3rem;
     font-weight: 500;
-    color: #CCCCCC;
+    color: #950740;
+    letter-spacing: 0.2rem;
 
 }
 
@@ -84,7 +87,7 @@ input[type='text'] {
     border-radius: 10px;
 }
 
-[type='password'] {
+input[type='password'] {
     height: 1rem;
     padding: 0.6rem;
     border: 0;
@@ -106,7 +109,7 @@ input[type='text'] {
 }
 
 .newUser {
-    margin-left: 14em;
+    margin-left: 15em;
     color: #14A098;
     text-decoration: none;
 }
@@ -127,7 +130,8 @@ input[type='text'] {
 /*Classes in file: Views/DefaultPage FINISH here*/
 
 
-/*Classes in file CreateUser START here*/
+/*Classes in files CreateUser and DisplayProject START here*/
+
 .newUserAccount {
     display: flex;
     justify-content: space-around;
@@ -138,4 +142,79 @@ input[type='text'] {
     justify-content: center;
 }
 
-/*Classes in file CreateUser STOP here*/
+
+.list_task {
+    text-decoration: none;
+    color: #CCCCCC;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 3rem;
+    list-style: none;
+    padding-left: 0;
+}
+
+.list_task:hover {
+    font-weight: 600;
+}
+
+h3 {
+    text-align: center;
+    color: #950740;
+    font-size: 30px;
+}
+
+.addUserToProject {
+    display: flex;
+    justify-content: center;
+    color: #CCCCCC;
+    text-decoration: none;
+    margin: 2em;
+}
+
+/*Classes in files CreateUser and DisplayTask FINISH here*/
+
+
+/*Classes in CreateTask START here*/
+.create_task {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.addTaskPriority {
+    height: 1rem;
+    padding: 0.6rem;
+    border: 0;
+    border-radius: 10px;
+}
+
+.taskLifeCycle {
+    height: 2.2rem;
+    padding: 0.6rem;
+    border: 0;
+    border-radius: 10px;
+}
+
+/*Classes in CreateTask FINISH here*/
+
+
+/*Classes in DisplayUser START here*/
+.class_user {
+    text-decoration: none;
+    color: #CCCCCC;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+.class_user:hover {
+    font-weight: 600;
+}
+
+.real_project {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
