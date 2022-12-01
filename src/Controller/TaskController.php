@@ -5,6 +5,7 @@ namespace Team\Projectbuilder\Controller;
 use Team\Projectbuilder\Model\Task;
 use Team\Projectbuilder\Model\User;
 use Team\Projectbuilder\Model\Project;
+use Team\Projectbuilder\Model\Affectation;
 use Team\Projectbuilder\Core\Security;
 use Team\Projectbuilder\Core\Views;
 use Team\Projectbuilder\Core\Validate;
@@ -14,8 +15,14 @@ class TaskController
 
     public function __construct()
     {
-        if(isset($_GET['delete'])) {
+        if (isset($_GET['delete'])) {
             Task::deleteById((int)$_GET['delete']);
+        }
+
+        if (isset($_GET['updatetask']) && $_POST['users_list'] !== '') {
+
+            $user = User::getByAttribute('email', $_POST['users_list'])[0]->getId();
+            Task::updateAssignedUser($user, $_GET['updatetask']);
         }
         if (isset($_GET['insert'])) {
             $this->createTask();
@@ -41,8 +48,22 @@ class TaskController
         foreach ($project->getTasks() as $task) {
             $task->setUser();
         }
-        $view->setVar('project', $project);
-        $view->render();
+        $idAdmin = $project->getIdAdmin();
+        $projectsMemberId = $this->displayProjectUsers($project);
+        $users = [];
+        $isConnectedUseraMember = FALSE;
+        foreach ($projectsMemberId as $userid) {
+            if ($userid === $_SESSION['id']) {
+                $isConnectedUseraMember = TRUE;
+            }
+            $users[] = User::getById($userid);
+        }
+        if ($isConnectedUseraMember) {
+            $view->setVar('idAdmin', $idAdmin);
+            $view->setVar('project', $project);
+            $view->setVar('users', $users);
+            $view->render();
+        }
     }
 
     public function createTask()
@@ -53,10 +74,9 @@ class TaskController
         } else {
             header('location: index.php');
         }
-
         $view->setVar('submit', 'Create task');
         $view->setVar('message', 'Create a new task');
-        
+
         if (isset($_POST['create'])) {
             if (($message = $this->isValid()) === '') {
                 if (Task::create()) {
@@ -78,19 +98,20 @@ class TaskController
         return $return;
     }
 
-    public function updateTask() {
+    public function updateTask()
+    {
         $view = new Views('CreateTask', 'Update an task');
         if (Security::isConnected()) {
             $view->setVar('connected', true);
         } else {
             header('location: index.php');
         }
-        $view->setVar('action','&update='.$_GET['update']);
+        $view->setVar('action', '&update=' . $_GET['update']);
         if (isset($_POST['create'])) {
-            if ($message=$this->isValid() === '') {
+            if ($message = $this->isValid() === '') {
                 if (Task::updateById()) {
                     $view->setVar('message', 'Task updated succesfully');
-                } else {    
+                } else {
                     $view->setVar('message', 'An error has occured');
                 }
             } else {
@@ -98,11 +119,22 @@ class TaskController
             }
         }
         $task = Task::getById($_GET['update']);
-        $view->setVar('title',$task->getTitle());
-        $view->setVar('description',$task->getDescription());
-        $view->setVar('priority',$task->getPriority());
-        $view->setVar('lifeCycle',$task->getLifeCycle());
+        $view->setVar('title', $task->getTitle());
+        $view->setVar('description', $task->getDescription());
+        $view->setVar('priority', $task->getPriority());
+        $view->setVar('lifeCycle', $task->getLifeCycle());
         $view->setVar('submit', 'update');
         $view->render();
+    }
+
+    public function displayProjectUsers($project)
+    {
+        $project = Project::getById($_GET['idproject']);
+        $project->setAffectation();
+        $return = [];
+        foreach ($project->getAffectations() as $affectation) {
+            $return[] = $affectation->getIdUser();
+        }
+        return $return;
     }
 }
