@@ -1,9 +1,9 @@
 <?php
 
-echo "<h2>$pageTitle</h2>";
+// echo "<h2>$pageTitle</h2>";
 
 if (isset($message)) {
-    echo '<div>'.$message.'</div>';
+    echo '<div class="welcome">'.$message.'</div>';// Welcome message at home page
 }
 if ($connected !== true):
 ?>

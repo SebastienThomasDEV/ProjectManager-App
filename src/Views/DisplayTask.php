@@ -1,7 +1,8 @@
 <?php
 
-echo "<h2>" . $project->getProjectName() . "</h2><br>";
-echo "<h3>$pageTitle</h3>";
+// echo "<h2>$pageTitle</h2>";
+echo "<h3>" . $project->getProjectName() . "</h3><br>";
+
 $tasks = $project->getTasks();
 foreach ($tasks as $task) {
     echo $task->getTitle() . ' ';

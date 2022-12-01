@@ -1,5 +1,6 @@
 <header>
-    <nav>
+    <nav class="navbar">
+        <img src="logo.png" alt="logo" class="logo">
         <a href='index.php'>Home</a>
         <?php if (isset($connected) && $connected === true): ?>
         <a href='index.php?page=displayproject'>Project</a>
