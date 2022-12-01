@@ -21,7 +21,7 @@ foreach ($tasks as $task) {
 <?php
     }
 
-    echo "<a href='index.php?page=". $_GET['page'] ."&idproject=" . $project->getId() . "&delete=" . $task->getId() . "'>Supprimer</a> ";
-    echo "<a href='index.php?page=" . $_GET['page'] . "&update=" . $task->getId() . "'>Modifier</a><br>";
+    echo "<a href='index.php?page=". $_GET['page'] ."&idproject=" . $project->getId() . "&delete=" . $task->getId() . "'>Delete</a> ";
+    echo "<a href='index.php?page=" . $_GET['page'] . "&update=" . $task->getId() . "'>Modify</a><br>";
 }
 echo "<a href='index.php?page=" . $_GET['page'] . "&idproject=" . $project->getId() . "&insert=1'>Add new task</a>";

@@ -1,56 +1,141 @@
 body {
+    background-color: #123239;
+    margin: 0;
+    min-height: 100%;
+    width: 100%;
+    font-family: 'arcon', Calibri, Arial, sans-serif, serif;
+}
+
+/* .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: #0f292f;
+} */
+
+.logo {
+    max-width: 18rem;
+    padding: 0.2rem;
+    /* position: absolute;
+    left: 1rem; */
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.logo {
-    max-width: 18rem;
-    padding-top: 0;
+    background-color: #0f292f;
 }
 
 .navbar a {
-    color: #14A098;
+    display: flex;
+    color: #CCCCCC;
     text-decoration: none;
     text-transform: uppercase;
-    padding: 2rem;
     letter-spacing: 0.1rem;
     font-size: 1.2rem;
 }
 
-h2 {
-    text-align: center;
-    font-size: 4rem;
-    color: white;
+.navbar a:hover {
+    color: #14A098;
 }
 
-.welcome {
-    padding: 0;
+.logged {
+    color: #CCCCCC;
+    font-size: 1.2rem;
+    margin: 0 1rem;
 }
 
+/* div = messages after action*/
 div {
-    color: white;
+    color: #CCCCCC;
     font-size: 2rem;
     text-align: center;
+    margin-bottom: 2em;
 }
 
-.sketuveu {
-    display: flex;
-    justify-content: space-around;
+/*Titles on the top of the page*/
+h2 {
+    text-align: center;
+    margin: 2em 1em;
+    font-size: 3rem;
+    font-weight: 500;
+    color: #CCCCCC;
+
 }
 
+/*Changing forms inputs apperance*/
 input[type="submit"] {
-    background-color: #022140;
-    color: #ffffff;
+    background-color: #14A098;
+    color: #CCCCCC;
+    font-weight: 600;
     padding: auto;
     border: none;
     border-radius: 1.6rem;
     padding: 0.6rem 1.2rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-left: 2.5rem;
 }
+
+input[type='text'] {
+    height: 1rem;
+    padding: 0.6rem;
+    border: 0;
+    border-radius: 10px;
+}
+
+[type='password'] {
+    height: 1rem;
+    padding: 0.6rem;
+    border: 0;
+    border-radius: 10px;
+}
+
+
+/*Classes in file: Views/DefaultPage START here*/
+.welcome {
+    margin-top: 2em;
+    letter-spacing: 0.1rem;
+    font-size: 4rem;
+}
+
+.connection {
+    margin: 8em 10em 1em 10em;
+    display: flex;
+    justify-content: space-around;
+}
+
+.newUser {
+    margin-left: 14em;
+    color: #14A098;
+    text-decoration: none;
+}
+
+.newUser:hover {
+    font-weight: 600;
+}
+
+.forgottenPassword {
+    color: #14A098;
+    text-decoration: none;
+}
+
+.forgottenPassword:hover {
+    font-weight: 600;
+}
+
+/*Classes in file: Views/DefaultPage FINISH here*/
+
+
+/*Classes in file CreateUser START here*/
+.newUserAccount {
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem 1rem;
+}
+
+.newUserAccountSubmitButton {
+    justify-content: center;
+}
+
+/*Classes in file CreateUser STOP here*/

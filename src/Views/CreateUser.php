@@ -7,6 +7,7 @@
     ?>
 
 <form method='POST' action='index.php?page=<?php echo $_GET['page'].$action; ?>'>
+<div class="newUserAccount">
     <?php
         if (isset($_GET['update']) || isset($_GET['insert']) ):
     ?>
@@ -27,8 +28,10 @@
     <?php
         endif; 
     ?>
-    
+</div>
+<div class="newUserAccountSubmitButton">
     <input type='submit' name='submit' value='<?php echo $submit; ?>'>
+</div>
 </form>
 
 
