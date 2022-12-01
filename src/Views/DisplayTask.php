@@ -3,6 +3,7 @@
 echo "<h2>" . $project->getProjectName() . "</h2><br>";
 echo "<h3>$pageTitle</h3>";
 $tasks = $project->getTasks();
+
 foreach ($tasks as $task) {
     echo $task->getTitle() . ' ';
     echo $task->getDescription() . ' ';
@@ -41,19 +42,25 @@ if ($idAdmin == $_SESSION['id']) {
 ?>
 
 <h3>User list</h3>
+<?php
+if (isset($message)) {
+    echo '<div>' . $message . '</div>';
+}
+?>
 <ul>
     <?php
     foreach ($users as $user) {
         echo "<li>" . $user->getFirstName() . $user->getLastName() . $user->getEmail() . "</li>";
     }
-    if ($idAdmin == $_SESSION['id']):
+    if ($idAdmin == $_SESSION['id']) :
     ?>
-    <form method="POST" action="">
-        <input name='adduser' type='submit' value='Add user to project'>
-    </form>
-    
-    <a href='index.php?page=displayuser&insert=1'>Create User</a>
-    
+        <form method="POST" action="">
+            <input name='email' type='email' placeholder='Enter an email'>
+            <input name='adduser' type='submit' value='Add user to project'>
+        </form>
+
+        <a href='index.php?page=displayuser&insert=1'>Create User</a>
+
     <?php
     endif;
     ?>
