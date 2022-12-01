@@ -20,7 +20,6 @@ class TaskController
         }
 
         if (isset($_GET['updatetask']) && $_POST['users_list'] !== '') {
-
             $user = User::getByAttribute('email', $_POST['users_list'])[0]->getId();
             Task::updateAssignedUser($user, $_GET['updatetask']);
         }
@@ -41,11 +40,11 @@ class TaskController
         } else {
             header('location: index.php');
         }
+        if (isset($_POST['adduser']) && $_POST['email'] !== '') {
+            $adduser = $this->addUserToProject($_POST['email']);
+            $view->setVar('message', $adduser);
+        }
         $view->setVar('submit', 'Create new task');
-        $view->setVar('message', 'Task list');
-        echo "<pre>";
-        var_dump($_POST['email']);
-        echo "</pre>";
         $project = Project::getById($_GET['idproject']);
         $project->setTasks();
         foreach ($project->getTasks() as $task) {
@@ -94,18 +93,23 @@ class TaskController
         $view->render();
     }
 
+
+
+
     private function isValid()
     {
 
         $return = '';
         if (isset($_POST['adduser'])) {
-            // créeer la fonction dans validate 
-            $return .= Validate::addUserToProject();
+            $return .= Validate::addUserToProject($_POST['email']);
         } else {
             $return .= Validate::newTask($_POST['title'], 'Task title is already used<br>', 'Enter an other task title<br>');
         }
         return $return;
     }
+
+
+
 
     public function updateTask()
     {
@@ -148,27 +152,30 @@ class TaskController
     }
 
     public function addUserToProject($email)
-    {
-        if (isset($_POST['adduser'])) {
-
-            if ($message = $this->isValid() === '') {
-                if (Task::updateById()) {
-                    $view->setVar('message', 'Task updated succesfully');
-                } else {
-                    $view->setVar('message', 'An error has occured');
-                }
-            } else {
-                $view->setVar('message', $message);
+    {   
+        $return = '';
+        $idUser = User::getByAttribute('email', $email)[0]->getId();
+        $verifs=Affectation::getAll();
+        $alreadyAssigned= FALSE;
+        foreach($verifs as $verif){
+            if($verif->getIdUser()==$idUser && $verif->getIdProject()==$_GET['idproject']){
+                $alreadyAssigned= TRUE;
             }
         }
-
-
-
-        $return = '';
-        $project = Project::getById($_GET['idproject']);
-        $user = User::getByAttribute('email', $email);
-        if ($user === true) {
+        if (isset($_POST['adduser']) && $alreadyAssigned != TRUE ) {
+            if ($message = $this->isValid() === '') {
+                if (Task::addUser($idUser, $_GET['idproject'])) {
+                    $return = 'User added succesfully';
+                } else {
+                    $return = 'An error has occured';
+                }
+            }
+        }else {
+            $return = 'User is already assigned to this project';
+            return $return;
         }
         return $return;
     }
+
+    
 }

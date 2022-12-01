@@ -143,6 +143,23 @@ class UserController
             
         }
 
+        if (isset($_GET['insert'])){
+            $return .= Validate::ValidateNom(
+                $_POST['lastname'],
+                'Last name is not correct <br>',
+                'The field "last name" cannot be empty <br>'
+            );
+            $return .= Validate::ValidateNom(
+                $_POST['firstname'],
+                'First name is not correct <br>',
+                'The field "first name" cannot be empty <br>'
+            );
+                $return .= Validate::ValidateEmail($_POST['email']);
+                $return .= Validate::newEmail($_POST['email']);    
+            
+            
+        }
+
         if (isset($_GET['updatepwd'])){
             $user = User::getById($_GET['updatepwd']);
             $oldPwd = $user->getPwd();

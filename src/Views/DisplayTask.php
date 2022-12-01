@@ -3,6 +3,7 @@
 echo "<h2>" . $project->getProjectName() . "</h2><br>";
 echo "<h3>$pageTitle</h3>";
 $tasks = $project->getTasks();
+
 foreach ($tasks as $task) {
     echo $task->getTitle() . ' ';
     echo $task->getDescription() . ' ';
@@ -41,6 +42,11 @@ if ($idAdmin == $_SESSION['id']) {
 ?>
 
 <h3>User list</h3>
+<?php
+if (isset($message)) {
+    echo '<div>' . $message . '</div>';
+}
+?>
 <ul>
     <?php
     foreach ($users as $user) {
