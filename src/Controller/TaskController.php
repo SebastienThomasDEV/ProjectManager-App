@@ -18,6 +18,12 @@ class TaskController
         if (isset($_GET['delete'])) {
             Task::deleteById((int)$_GET['delete']);
         }
+
+        if (isset($_GET['updatetask']) && $_POST['users_list'] !== '') {
+
+            $user = User::getByAttribute('email', $_POST['users_list'])[0]->getId();
+            Task::updateAssignedUser($user, $_GET['updatetask']);
+        }
         if (isset($_GET['insert'])) {
             $this->createTask();
         } else if (isset($_GET['update'])) {
@@ -35,6 +41,7 @@ class TaskController
         } else {
             header('location: index.php');
         }
+        var_dump($_POST);
         $view->setVar('submit', 'Create new task');
         $view->setVar('message', 'Task list');
         $project = Project::getById($_GET['idproject']);
@@ -43,14 +50,8 @@ class TaskController
             $task->setUser();
         }
         $idAdmin = $project->getIdAdmin();
-
-
-
         $projectsMemberId = $this->displayProjectUsers($project);
         $users = [];
-        echo "<pre>";
-        var_dump($projectsMemberId);
-        echo "</pre>";
         $isConnectedUseraMember = FALSE;
         foreach ($projectsMemberId as $userid) {
             if ($userid === $_SESSION['id']) {

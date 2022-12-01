@@ -14,22 +14,23 @@ foreach ($tasks as $task) {
         echo $task->getUser()->getEmail();
     } else if ($idAdmin == $_SESSION['id']) {
 ?>
-        <form method="POST" action="" id="selectuser">
-            <input name='assignuser' type='submit' value='Assign User'>
+        <form method="POST" action='index.php?page=<?php echo $_GET['page'] . "&idproject=" . $project->getId() . "&updatetask=" . $task->getId(); ?>' id="selectuser<?php echo $task->getID(); ?>">
+            <input name='assignuser' type='submit' value='Assign a user to this task'>
         </form>
-        <select name="users_list" form="selectuser">
-            <option value=""></option>
+        <select name="users_list" form="selectuser<?php echo $task->getID(); ?>">
+            <option value="">Select user</option>
             <?php
             foreach ($users as $user) {
                 echo '<option value="' . $user->getEmail() . '">' . $user->getEmail() . '</option>';
             }
+
             ?>
         </select>
 <?php
     }
     if ($idAdmin == $_SESSION['id']) {
-        echo "<a href='index.php?page=" . $_GET['page'] . "&idproject=" . $project->getId() . "&delete=" . $task->getId() . "'>Supprimer</a> ";
-        echo "<a href='index.php?page=" . $_GET['page'] . "&update=" . $task->getId() . "'>Modifier</a><br>";
+        echo "<a href='index.php?page=" . $_GET['page'] . "&idproject=" . $project->getId() . "&delete=" . $task->getId() . "'>Delete</a> ";
+        echo "<a href='index.php?page=" . $_GET['page'] . "&update=" . $task->getId() . "'>Modify</a><br>";
     }
 }
 if ($idAdmin == $_SESSION['id']) {
@@ -39,6 +40,7 @@ if ($idAdmin == $_SESSION['id']) {
 
 ?>
 
+<h3>User list</h3>
 <ul>
     <?php
     foreach ($users as $user) {
@@ -46,7 +48,7 @@ if ($idAdmin == $_SESSION['id']) {
     }
     ?>
     <form method="POST" action="">
-        <input name='adduser' type='submit' value='Add User'>
-        <input name='createuser' type='submit' value='Create User'>
+        <input name='adduser' type='submit' value='Add user to project'>
     </form>
+    <a href='index.php?page=displayuser&insert=1'>Create User</a>
 </ul>
