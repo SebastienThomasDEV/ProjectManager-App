@@ -43,6 +43,9 @@ class TaskController
         }
         $view->setVar('submit', 'Create new task');
         $view->setVar('message', 'Task list');
+        echo "<pre>";
+        var_dump($_POST['email']);
+        echo "</pre>";
         $project = Project::getById($_GET['idproject']);
         $project->setTasks();
         foreach ($project->getTasks() as $task) {
@@ -93,8 +96,14 @@ class TaskController
 
     private function isValid()
     {
+
         $return = '';
-        $return .= Validate::newTask($_POST['title'], 'Task title is already used<br>', 'Enter an other task title<br>');
+        if (isset($_POST['adduser'])) {
+            // créeer la fonction dans validate 
+            $return .= Validate::addUserToProject();
+        } else {
+            $return .= Validate::newTask($_POST['title'], 'Task title is already used<br>', 'Enter an other task title<br>');
+        }
         return $return;
     }
 
@@ -134,6 +143,31 @@ class TaskController
         $return = [];
         foreach ($project->getAffectations() as $affectation) {
             $return[] = $affectation->getIdUser();
+        }
+        return $return;
+    }
+
+    public function addUserToProject($email)
+    {
+        if (isset($_POST['adduser'])) {
+
+            if ($message = $this->isValid() === '') {
+                if (Task::updateById()) {
+                    $view->setVar('message', 'Task updated succesfully');
+                } else {
+                    $view->setVar('message', 'An error has occured');
+                }
+            } else {
+                $view->setVar('message', $message);
+            }
+        }
+
+
+
+        $return = '';
+        $project = Project::getById($_GET['idproject']);
+        $user = User::getByAttribute('email', $email);
+        if ($user === true) {
         }
         return $return;
     }
